@@ -1,0 +1,28 @@
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.mail{
+  width: 50%;
+  margin: auto;
+  padding-top: 120px;
+}
+
+.Verify{
+  color: rgb(76, 71, 71);
+  margin-bottom: 15px;
+}
+
+.text{
+  color: rgb(76, 71, 71);
+  font-size: 18px;
+  text-align: justify;
+  line-height: 25px;
+}
+
+body{
+  padding: 100px;
+  vertical-align: middle;
+}

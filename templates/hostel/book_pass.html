@@ -1,0 +1,32 @@
+<!-- templates/book_exeat.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Exeat</title>
+</head>
+<body>
+
+<h2>Book Exeat</h2>
+
+<form method="post" action="{% url 'pass' %}">
+    {% csrf_token %}
+    
+    <label for="departure_date">Departure Date:</label>
+    <input type="date" name="departure_date" required>
+    
+    <label for="return_date">Return Date:</label>
+    <input type="date" name="return_date" required>
+    
+    <label for="return_date">Parent Number:</label>
+    <input type="tel" name="parent_number" required>
+    
+    <label for="reason">Reason:</label>
+    <textarea name="reason" required></textarea>
+    
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
