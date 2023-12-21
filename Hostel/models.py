@@ -38,7 +38,8 @@ class CustomUser(AbstractUser):
     room = models.ForeignKey('Room', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return self.username
+        return f"{self.first_name} {self.last_name}"
+    
 
 
 
@@ -70,7 +71,7 @@ class Room(models.Model):
     # Add any other relevant fields
 
     def __str__(self):
-        return f"{self.block} - Room {self.name}"
+        return f"{self.block} - {self.name}"
 
 class Bunk(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
@@ -79,13 +80,13 @@ class Bunk(models.Model):
     # Add any other relevant fields
 
     def __str__(self):
-        return f"{self.room} - Bunk {self.name} "
+        return f"{self.room} - {self.name} "
 
 class Position(models.Model):
     bunk = models.ForeignKey(Bunk, on_delete=models.CASCADE, default='1')
     position = models.CharField(max_length=50)  # 'Up' or 'Down'
     def __str__(self):
-        return f"{self.bunk} - Bunk {self.position}"
+        return f"{self.bunk} - {self.position}"
 
 class Complaint (models.Model):
     title = models.CharField(max_length = 100)

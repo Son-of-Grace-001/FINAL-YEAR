@@ -5,14 +5,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from allauth.account.views import SignupView
 from .forms import CustomSignupForm, EditProfileForm
-from .models import Department, CustomUser, Exeat, Upload, Amount
+from .models import Department, CustomUser, Exeat, Upload, Amount, Complaint
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 import requests
 
 def home (request):
@@ -58,10 +58,6 @@ def edit_profile(request):
         form = EditProfileForm(instance=request.user)
     return render(request, 'hostel/edit_profile.html', {'form': form})
 
-# views.py
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from .models import Complaint
 
 @login_required
 def complaint(request):
@@ -198,5 +194,6 @@ def hostel_fees(request):
 
 #     # Payment was not successful, handle accordingly
 #     return HttpResponse("Payment failed")
+
 
 
