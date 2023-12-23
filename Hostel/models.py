@@ -37,6 +37,8 @@ class CustomUser(AbstractUser):
     hostel = models.ForeignKey('Hostel', on_delete=models.SET_NULL, null=True)
     block = models.ForeignKey('Block', on_delete=models.SET_NULL, null=True)
     room = models.ForeignKey('Room', on_delete=models.SET_NULL, null=True)
+    bunk = models.ForeignKey('Bunk', on_delete=models.SET_NULL, null=True)
+    space = models.ForeignKey('BedSpace', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -67,7 +69,6 @@ class Block(models.Model):
 
 class Room(models.Model):
     block = models.ForeignKey(Block, on_delete=models.CASCADE)
-    number = models.IntegerField()
     name = models.CharField(max_length=10, default=1)
     # Add any other relevant fields
 
@@ -83,9 +84,12 @@ class Bunk(models.Model):
     def __str__(self):
         return f"{self.room} - {self.name} "
 
-class Position(models.Model):
+class BedSpace(models.Model):
     bunk = models.ForeignKey(Bunk, on_delete=models.CASCADE, default='1')
-    position = models.CharField(max_length=50)  # 'Up' or 'Down'
+    position = models.CharField(max_length=4, choices=[('Up', 'Up'), ('Down', 'Down')])
+    is_allocated= models.BooleanField(default=False)
+    class Meta:
+        unique_together = ('bunk', 'position')
     def __str__(self):
         return f"{self.bunk} - {self.position}"
 

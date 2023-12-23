@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allocate Room</title>
+</head>
+<body>
+
+    {% for message in messages %}
+    <p>{{ message }} </p>
+    {% endfor %}
+    <h4>Select your bed space</h4>
+    <form method="post">
+        {% csrf_token %}
+        {% for hostel, bed_spaces in available_spaces %}
+            <h3>{{ hostel }}</h3>
+            {% if bed_spaces %}
+                <p>Available Bed spaces:</p>
+                <select name="{{ hostel }}" id="{{ hostel }}" onchange="onBedSpaceChange('{{ hostel }}')">
+                    <option value="">Select-an-option</option>
+                    {% for space in bed_spaces %}
+                    <option value="{{ space.id }}">{{ space }}</option>
+                    {% endfor %}
+                </select>
+            {% else %}
+            <p>No slot available</p>
+            {% endif %}
+            <br>
+        {% endfor %}
+        <input type="hidden" name="hostel-name" id="hostel-name">
+        <input type="hidden" name="space" id="hostel-space">
+        <button>Book bed space</button>
+    </form>
+    <script>
+        function selection(e){
+            e.prevent
+        }
+        function onBedSpaceChange(e) {
+            var selectedValue = document.getElementById(e).value;
+            document.getElementById("hostel-name").value = e
+            document.getElementById("hostel-space").value = selectedValue
+        }
+    </script>
+</body>
+</html>

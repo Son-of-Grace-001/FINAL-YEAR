@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from allauth.account.views import SignupView
 from .forms import CustomSignupForm, EditProfileForm
-from .models import Department, CustomUser, Exeat, Upload, Amount, Complaint
+from .models import Department, CustomUser, Exeat, Upload, Amount, Complaint, Hostel, BedSpace
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.core.mail import EmailMessage
@@ -181,7 +181,10 @@ def send_mail(instance):
     mail.send()
 
 @login_required
-def book_room(request):
+def upload_school_fee_evidence(request):
+    # if user already have an hostel allocated to them, they should be redirected to home page
+    if request.user.hostel or request.user.block or request.user.room:
+        return redirect('home')
     if request.method == 'POST':
         image = request.FILES['proof']
         payment_proof = Upload.objects.create(user=request.user, evidence=image)
@@ -190,10 +193,58 @@ def book_room(request):
         return redirect ('hostel_fees')
     return render (request, 'hostel/book_room.html')
 
+@login_required
+def book_room(request):
+    user = request.user
+    # if user already have an hostel allocated to them, they should be redirected to home page
+    if user.hostel or user.block or user.room:
+        return redirect('home')
+    if user.gender == "1":
+        gender = 'male'
+    else:
+        gender = 'female'
+    all_hostels = Hostel.objects.filter(gender=gender)
+    if request.method == "POST":
+        hostel_name = get_object_or_404(Hostel, name=request.POST.get("hostel-name"))
+        bed_space = get_object_or_404(BedSpace, id=request.POST.get("space"))
+        if bed_space.bunk.room.block.hostel != hostel_name:
+            messages.info(request, "Invalid details")
+            return redirect("book_room")
+        if bed_space.is_allocated:
+            messages.info(request, "Bed space not available")
+            return redirect("book_room")
+        bed_space.is_allocated = True
+        bed_space.save()
+    
+        user.hostel = hostel_name
+        user.block = bed_space.bunk.room.block
+        user.room = bed_space.bunk.room
+        user.bunk = bed_space.bunk
+        user.space = bed_space
+        user.save()
+        messages.info(request, "Room Alocated successfully")
+        return redirect('home')
+
+    available_spaces = []
+
+    for hostel in all_hostels:
+        all_bed_spaces = BedSpace.objects.filter(bunk__room__block__hostel=hostel)
+        allocated_bed_spaces = all_bed_spaces.filter(is_allocated=True)
+        available_bed_spaces = all_bed_spaces.exclude(pk__in=allocated_bed_spaces.values_list('pk', flat=True))
+        available_spaces.append((hostel.name, available_bed_spaces))
+
+    context = {
+        'available_spaces': available_spaces
+    }
+    return render(request, 'hostel/allocate_room.html', context)
+
 
 @login_required
 def hostel_fees(request):
     user = request.user
+    # if user already have an hostel allocated to them, they should be redirected to home page
+    if user.hostel or user.block or user.room:
+        return redirect('home')
     hostel_amount = Amount.objects.latest('price')
     context = {
         'user_email': user.email,
