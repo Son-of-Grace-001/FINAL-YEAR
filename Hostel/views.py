@@ -14,6 +14,8 @@ from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, Http404
 import requests
+from io import BytesIO
+from reportlab.pdfgen import canvas
 
 def home (request):
   return render (request, 'hostel/home.html')
@@ -145,6 +147,38 @@ def book_pass(request):
         return redirect('dashboard')
 
     return render(request, 'hostel/book_pass.html')
+
+
+
+def generate_pdf(instance):
+    # Create a BytesIO buffer to store the PDF content
+    buffer = BytesIO()
+
+    # Create the PDF object, using the BytesIO buffer as its "file."
+    pdf = canvas.Canvas(buffer)
+
+    # Add content to the PDF
+    pdf.drawString(100, 800, f'Hello, {instance.user.username}')
+    pdf.drawString(100, 780, f"Your exeact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by An Admin")
+
+    # Save the PDF to the buffer
+    pdf.showPage()
+    pdf.save()
+
+    # File pointer to the beginning of the buffer
+    buffer.seek(0)
+    return buffer
+def send_mail(instance):
+    if instance.status == 'APPROVED':
+        pdf_buffer = generate_pdf(instance)
+        subject = "Exeat Request Approved"
+    else:
+        subject = "Exeat Request Rejected"
+    body = f"Dear {instance.user.username} Your Exeat request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by An Admin"
+    mail = EmailMessage(subject= subject, body=body, from_email=settings.EMAIL_HOST_USER , to = [instance.user.email])
+    if instance.status == 'APPROVED':
+        mail.attach('Exeat.pdf', pdf_buffer.read(), 'application/pdf')
+    mail.send()
 
 @login_required
 def book_room(request):

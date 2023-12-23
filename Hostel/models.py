@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.db.models.signals import pre_save
 from django.conf import settings
 
 
@@ -99,17 +100,35 @@ class Complaint (models.Model):
         return f"{self.title} - Room {self.room_number} in Block {self.block_number}"
     
 
+
+
+CHOICE_FOR_EXEAT = (
+    ("PENDING", 'Exect request is pending'),
+    ("APPROVED", 'Approved by admin'),
+    ("REJECTED", 'Rejected by Admin')
+)
 class Exeat(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     parent_number = models.IntegerField( )
     departure_date = models.DateField()
     return_date = models.DateField()
     reason = models.TextField()
-    is_approved = models.BooleanField(default=False)
+    status = models.CharField(max_length=10, choices=CHOICE_FOR_EXEAT, default=CHOICE_FOR_EXEAT[0][0])
 
     def __str__(self):
         return f"{self.user} - {self.departure_date} to {self.return_date}"
-    
+
+
+@receiver(pre_save, sender=Exeat)
+def exeact_pre_save(sender, instance, **kwargs):
+    # Check if the save is being triggered from the admin panel
+    if hasattr(instance, '_state') and hasattr(instance._state, 'adding') and not instance._state.adding:
+        # pre-save logic
+        from .views import send_mail
+        if instance.status == "APPROVED" or instance.status == "REJECTED":
+            send_mail(instance)
+
+
 class Upload(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     evidence = models.ImageField(upload_to = 'evidence-of-payment')
