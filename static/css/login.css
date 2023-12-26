@@ -83,6 +83,10 @@ a{
   font-size: 18px;
 }
 
+li{
+  display: none;
+}
+
 /* .forgot-password-link{
   float: right;
 } */
