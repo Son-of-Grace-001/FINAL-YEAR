@@ -1,31 +1,38 @@
+{% load static %}
 <!-- templates/book_exeat.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bookpass.css' %}">
     <title>Book Exeat</title>
 </head>
 <body>
 
-<h2>Book Exeat</h2>
-
 <form method="post" action="{% url 'pass' %}">
     {% csrf_token %}
+
+    <div class="img-div">
+        <img class="logo" src="{% static 'img/logo one.jpeg' %}" alt="logo">
+      </div>
+      <h1 class="login-h">BOOK PASS</h1>
+      <p class="details">Pls fill in the informations correctly</p>
+    </div>
     
     <label for="departure_date">Departure Date:</label>
-    <input type="date" name="departure_date" required>
+    <input class="date" type="date" name="departure_date" required>
     
     <label for="return_date">Return Date:</label>
-    <input type="date" name="return_date" required>
+    <input type="date"  class="date" name="return_date" required>
     
     <label for="return_date">Parent Number:</label>
-    <input type="tel" name="parent_number" required>
+    <input type="tel" name="parent_number" required placeholder="Enter your parent number">
     
     <label for="reason">Reason:</label>
-    <textarea name="reason" required></textarea>
+    <textarea name="reason" required rows="6" col="15" placeholder="Enter the reason for booking pass"></textarea> <br>
     
-    <button type="submit">Submit</button>
+    <button class="submit" type="submit">Submit</button>
 </form>
 
 </body>

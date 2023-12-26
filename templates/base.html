@@ -16,17 +16,22 @@
     </div>
 
     <div class="middle-nav">
-      <ul class="nav-options">
+      <ul class="nav-options" id="nav-list">
         <li class="option1"> <a href="/">Home</a></li>
         <li class="option2"> <a href="#about-us">About us </a></li>
         <li class="option3"> <a href="#hostel-rules">Hostel rules</a></li>
-        <li class="option3"> <a href="#contact">Contact Us</a></li>
+        <li class="option4"> <a href="#contact">Contact Us</a></li>
+        <li class="option5"> <a href="{% url 'account_login' %}">Login</a></li>
+        <li class="option6"> <a href="{% url 'account_signup' %}">sign up</a></li>
       </ul>
     </div>
 
     <div class=right-nav>
       <a href="{% url 'account_login' %}"><button class="login">Login</button></a>
       <a href="{% url 'account_signup' %}"><button class="signup">Sign up</button></a>
+
+      <img id="menu" src="{% static 'img/menu.svg' %}" alt="hamburger menu">
+      <img id="close" src="{% static 'img/close.svg' %}" alt="close menu">
     </div>
   </nav>
 </header>
@@ -70,6 +75,6 @@
     </div>
   </div>
 </footer>
-
+<script src="{% static 'js/index.js' %}"></script>
 </body>
 </html>

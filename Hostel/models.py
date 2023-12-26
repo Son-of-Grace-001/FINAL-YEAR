@@ -99,6 +99,7 @@ class Complaint (models.Model):
     room_number = models.CharField(max_length = 100)
     message = models.TextField()
     image = models.ImageField(upload_to='complaints_image')
+    hostel_name = models.CharField(max_length=100, default='male new hostel')
 
     def __str__(self):
         return f"{self.title} - Room {self.room_number} in Block {self.block_number}"

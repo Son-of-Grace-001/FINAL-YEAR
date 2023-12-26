@@ -1,3 +1,5 @@
+{% load static %}
+
 <!-- templates/submit_complaint.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -5,27 +7,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Complaint</title>
+    <link rel="stylesheet" href="{% static 'css/bookpass.css' %}">
 </head>
 <body>
-    <h2>Submit Complaint</h2>
     <form method="post" enctype="multipart/form-data">
+
+        <div class="img-div">
+            <img class="logo" src="{% static 'img/logo one.jpeg' %}" alt="logo">
+          </div>
+          <h1 class="login-h">Complaint</h1>
+          <p class="details">Pls fill in the informations correctly</p>
+        </div>
+
         {% csrf_token %}
         <label for="title">Title:</label>
-        <input type="text" name="title" required>
-
+        <input type="text" name="title" required placeholder="Enter the complaint's title">
+        <label for="text">Hostel</label>
+        <input type="text" name="hostel_name" required placeholder="Enter your hostel name">
         <label for="block_number">Block Number:</label>
-        <input type="text" name="block_number" required>
+        <input type="text" name="block_number" required placeholder="Enter your block number">
 
         <label for="room_number">Room Number:</label>
-        <input type="text" name="room_number" required>
+        <input type="text" name="room_number" required placeholder="Enter your room number">
 
-        <label for="message">Message:</label>
-        <textarea name="message" rows="4" required></textarea>
+        <label for="message">Complaint:</label>
+        <textarea name="message" rows="6" required placeholder="Enter your complaints in details"></textarea>
 
         <label for="image">Image:</label>
-        <input type="file" name="image" accept="image/*">
+        <input type="file" name="image" accept="image/*" placeholder="Provide an image to buttress your complaint">
 
-        <button type="submit">Submit</button>
+        <button class="submit" type="submit">Submit</button>
     </form>
 </body>
 </html>

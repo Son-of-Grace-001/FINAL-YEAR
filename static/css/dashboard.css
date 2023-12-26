@@ -75,3 +75,34 @@ h3{
   color: #281470;
   text-transform: uppercase
 }
+
+@media only screen and (max-width:600px){
+  .grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-left:20px;
+    padding-right: 20px;
+  }
+
+  .welcome-h{
+    font-size: 20px;
+    margin-top: 35px;
+  }
+
+  .hero-dash{
+    height: 300px;
+  }
+
+  .option4{
+    margin-top: 30px;
+    display: block;
+  }
+
+  .profile-img{
+    display: block;
+  }
+
+  .our-hos, .our-hostel{
+    font-size:20px;
+  }
+}

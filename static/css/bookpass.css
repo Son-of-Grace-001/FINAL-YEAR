@@ -5,11 +5,14 @@
 }
 
 body{
-  padding:100px;
+  padding-left:100px;
+  padding-right: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 form{
-  width:40%;
+  width:50%;
   margin: auto;
 }
 
@@ -47,8 +50,11 @@ input, select{
   border-radius: 10px;
   border: 1px solid #b9b9b9;
   padding-left: 10px;
+  padding-right: 10px;
   margin-top:2px;
   margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .logo{
@@ -73,8 +79,19 @@ a{
 .submit{
   color: #fff;
   background-color: #281470;
-  border: 1px solid #281470; 
+  height: 40px;
+  width: 120px; 
+  border: 1px solid #281470;
   text-align: center; 
+  margin-top: 10px;
+}
+
+textarea{
+  width: 100%;
+  border: 1px solid #b9b9b9;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: justify;
 }
 
 .donot{
@@ -83,9 +100,42 @@ a{
   font-size: 18px;
 }
 
-/* .forgot-password-link{
-  float: right;
-} */
+.form-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr ;/* Two equal columns */
+  gap: 10px; /* Adjust the gap between the columns */
+}
+
+.password-validation {
+  color: #d9534f; /* Set the color to red or your desired color */
+  font-size: 8px; /* Set the font size as needed */
+  list-style-type: none;
+  margin-left: 20px;
+}
+
+label{
+  display: block;
+}
+
+ul{
+  list-style-type: none;
+}
+
+li{
+  color: #d9534f;
+  margin-left: 40px;
+  font-size: 12px;
+}
+
+select{
+  margin-bottom: 10px;
+}
+
+.date{
+  display: flex;
+  justify-content: space-between;
+}
+
 
 @media only screen and (max-width:600px){
   body{
@@ -99,5 +149,9 @@ a{
     background-color: #fff;
     padding: 20px;
     margin-top: 100px;
+  }
+
+  li{
+    margin-left: 20px;
   }
 }

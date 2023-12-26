@@ -69,13 +69,15 @@ def complaint(request):
         room_number = request.POST['room_number']
         message = request.POST['message']
         image = request.FILES['image']
+        hostel_name = request.POST['hostel_name']
 
         complaint = Complaint.objects.create(
             title=title,
             block_number=block_number,
             room_number=room_number,
             message=message,
-            image=image
+            image=image,
+            hostel_name=hostel_name
         )
         complaint.save()
 
@@ -184,7 +186,7 @@ def send_mail(instance):
 def upload_school_fee_evidence(request):
     # if user already have an hostel allocated to them, they should be redirected to home page
     if request.user.hostel or request.user.block or request.user.room:
-        return redirect('home')
+        return redirect('dashboard')
     if request.method == 'POST':
         image = request.FILES['proof']
         payment_proof = Upload.objects.create(user=request.user, evidence=image)
@@ -223,7 +225,7 @@ def book_room(request):
         user.space = bed_space
         user.save()
         messages.info(request, "Room Alocated successfully")
-        return redirect('home')
+        return redirect('dashboard')
 
     available_spaces = []
 
@@ -244,7 +246,7 @@ def hostel_fees(request):
     user = request.user
     # if user already have an hostel allocated to them, they should be redirected to home page
     if user.hostel or user.block or user.room:
-        return redirect('home')
+        return redirect('dashboard')
     hostel_amount = Amount.objects.latest('price')
     context = {
         'user_email': user.email,
@@ -253,32 +255,6 @@ def hostel_fees(request):
         'hostel_due': hostel_amount,
     }
     return render(request, 'hostel/hostel_fees.html', context)
-
-# @csrf_exempt
-# def paystack_callback(request):
-#     # Retrieve information from Paystack callback
-#     reference = request.POST.get('data[reference]')
-#     amount_paid = request.POST.get('data[amount]')
-
-#     # Verify payment status using Paystack API
-#     paystack_verify_url = f'https://api.paystack.co/transaction/verify/{reference}'
-#     headers = {'Authorization': 'Bearer YOUR_PAYSTACK_SECRET_KEY'}
-#     response = requests.get(paystack_verify_url, headers=headers)
-#     data = response.json()
-
-#     # Check if payment was successful
-#     if data['status'] and data['data']['status'] == 'success':
-#         # Payment was successful, perform additional logic if needed
-#         # For example, update your database, generate a booking, etc.
-
-#         # Retrieve the latest amount from your Amount model
-#         latest_amount = Amount.objects.latest('created')
-
-#         # Redirect to a template with the latest_amount information
-#         return render(request, 'your_template.html', {'latest_amount': latest_amount})
-
-#     # Payment was not successful, handle accordingly
-#     return HttpResponse("Payment failed")
 
 
 

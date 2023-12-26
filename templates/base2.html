@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{%  endblock %}</title>
-  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="{% static 'css/home2.css' %}">
   <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 </head>
 <body>
@@ -17,27 +17,30 @@
     </div>
 
     <div class="middle-nav">
-      <ul class="nav-options">
+      <ul class="nav-options" id="nav-list">
         <li class="option1"> <a href="{% url 'dashboard' %}">Home</a></li>
         <li class="option2"> <a href="{% url 'payment' %}">Book Room</a></li>
         <li class="option3"> <a href="{% url 'pass' %}">Book Pass</a></li>
         <li class="option3"> <a href="{% url 'complaint' %}">Complaint</a></li>
+        <li class="option42"> <a href="{% url 'account_logout' %}">logout</a></li>
       </ul>
     </div>
 
-    <div class=right-nav>
-      <a href="{% url 'account_logout' %}"><button class="signup">Logout</button></a>
+    <div class=right-nav2>
       {% if user.is_authenticated %}
-        {% if user.profile_image %}
-        <div class="profile-img">
-          <a href="{% url 'edit_profile' %}"><img class="profile-image" src="{{user.profile_image.url}}" alt="profile image"></a>
-        </div>
-        {% else %}
-        <a href="{% url 'edit_profile' %}">
-          <p>No image.</p>
-        </a>
-        {% endif %}
+      {% if user.profile_image %}
+      <div class="profile-img">
+        <a href="{% url 'edit_profile' %}"><img class="profile-image" src="{{user.profile_image.url}}" alt="profile image"></a>
+      </div>
+      {% else %}
+      <a href="{% url 'edit_profile' %}">
+        <p>No image.</p>
+      </a>
       {% endif %}
+      {% endif %}
+      <a class="logout-bttn" href="{% url 'account_logout' %}"><button class="signup">Logout</button></a>
+      <img id="menu" src="{% static 'img/menu.svg' %}" alt="hamburger menu">
+      <img id="close" src="{% static 'img/close.svg' %}" alt="close menu">
     </div>
   </nav>
 </header>
@@ -81,6 +84,6 @@
     </div>
   </div>
 </footer>
-
+<script src="{% static 'js/index.js' %}"></script>
 </body>
 </html>
