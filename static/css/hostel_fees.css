@@ -64,6 +64,6 @@ button[type="submit"]:hover {
 
 @media only screen and (max-width:600px){
   body{
-    padding-top: 0;
+    padding-top: 20px;
   }
 }
