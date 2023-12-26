@@ -113,6 +113,8 @@ li{
   color: #d9534f;
   /* margin-left: 40px; */
   font-size: 12px;
+  text-align: justify;
+  margin-bottom: 4px;
 }
 
 select{
