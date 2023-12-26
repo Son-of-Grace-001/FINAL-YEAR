@@ -13,6 +13,7 @@
 .Verify{
   color: rgb(76, 71, 71);
   margin-bottom: 15px;
+  text-align: center;
 }
 
 .text{
@@ -37,7 +38,16 @@ body{
   .mail{
     width: 100%;
     text-align: justify;
-    padding: 0px;
+    padding: 20px;
     background-color: #fff;
+    border-radius: 8px;
+  }
+
+  .Verify{
+    margin-top: 15px;
+  }
+
+  .text{
+    margin-bottom: 15px;
   }
 }
