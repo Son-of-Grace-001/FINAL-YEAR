@@ -160,7 +160,11 @@ def generate_pdf(instance):
     pdf = canvas.Canvas(buffer)
 
     # Add content to the PDF
-    pdf.drawString(100, 800, f'Hello, {instance.user.username}')
+    pdf.drawString(100, 800, f'Hello, {instance.user.first_name} {instance.user.last_name}')
+    pdf.drawString(100, 800, f'Hello, {instance.user.faculty}')
+    pdf.drawString(100, 800, f'Hello, {instance.user.department}')
+    pdf.drawString(100, 800, f'Hello, {instance.parent_number}')
+    pdf.drawString(100, 800, f'Hello, {instance.reason}')
     pdf.drawString(100, 780, f"Your exeact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by An Admin")
 
     # Save the PDF to the buffer
