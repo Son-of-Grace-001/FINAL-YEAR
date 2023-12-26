@@ -91,6 +91,9 @@ li{
   color: red;
   background-color: #fff;
   padding: 7px;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 /* .forgot-password-link{
   float: right;
@@ -107,6 +110,6 @@ li{
     margin: 0;
     background-color: #fff;
     padding: 20px;
-    margin-top: 50px;
+    margin-top: 10px;
   }
 }
