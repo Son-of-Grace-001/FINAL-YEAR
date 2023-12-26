@@ -87,6 +87,11 @@ li{
   display: none;
 }
 
+p{
+  color: red;
+  background-color: #fff;
+  padding: 7px;
+}
 /* .forgot-password-link{
   float: right;
 } */
