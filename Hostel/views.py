@@ -176,7 +176,7 @@ def send_mail(instance):
         subject = "Exeat Request Approved"
     else:
         subject = "Exeat Request Rejected"
-    body = f"Dear {instance.user.username} Your Exeat request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by An Admin"
+    body = f"Dear {instance.user.first_name} {instance.last_name} \n Faculty:{instance.faculty} \n Department: {instance.department} \n Your Exeat request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by An Admin"
     mail = EmailMessage(subject= subject, body=body, from_email=settings.EMAIL_HOST_USER , to = [instance.user.email])
     if instance.status == 'APPROVED':
         mail.attach('Exeat.pdf', pdf_buffer.read(), 'application/pdf')
