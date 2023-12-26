@@ -17,6 +17,7 @@ body{
 .confirm{
   color: rgb(76, 71, 71);
   font-size: 40px;
+  text-align: center;
 }
 
 .pp{
@@ -24,6 +25,7 @@ body{
   font-size: 18px;
   margin-top: 15px;
   margin-bottom: 15px;
+  text-align: justify;
 }
 
 input{
@@ -39,4 +41,21 @@ input{
   height: 40px;
   width: 120px;
   margin: auto;
+}
+
+
+@media only screen and (max-width:600px){
+  body{
+    padding: 20px;
+    background-color: #281470;
+  }
+
+  form{
+    width: 100%;
+    margin: 0;
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 10px;
+  }
+
 }
