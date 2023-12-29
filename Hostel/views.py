@@ -273,7 +273,7 @@ def book_room(request):
     }
     return render(request, 'hostel/allocate_room.html', context)
 
-def generate_pdf(instance):
+def generate_pdf(user):
     # Create a BytesIO buffer to store the PDF content
     buffer = BytesIO()
 
@@ -282,21 +282,21 @@ def generate_pdf(instance):
 
     # Add content to the PDF
     y_position = 800
-    pdf.drawString(100, 800, f'Hello, {instance.user.first_name} {instance.user.last_name}')
+    pdf.drawString(100, 800, f'Hello, {user.first_name} {user.last_name}')
     y_position -= 40
-    pdf.drawString(100, 780, f'Hostel: {instance.user.hostel}')
+    pdf.drawString(100, 780, f'Hostel: {user.hostel}')
     y_position -= 40
-    pdf.drawString(100, 760, f'Faculty: {instance.user.faculty}')
+    pdf.drawString(100, 760, f'Faculty: {user.faculty.name}')
     y_position -= 40
-    pdf.drawString(100, 740, f'Department: {instance.user.department}')
+    pdf.drawString(100, 740, f'Department: {user.department.name}')
     y_position -= 40
-    pdf.drawString(100, 720, f'Gender: {instance.user.gender}')
+    pdf.drawString(100, 720, f'Gender: {user.gender.name}')
     y_position -= 40
-    pdf.drawString(100, 700, f'Block: {instance.user.block}')
+    pdf.drawString(100, 700, f'Block: {user.block.name}')
     y_position -= 40
-    pdf.drawString(100, 680, f'Room: {instance.user.room}')
+    pdf.drawString(100, 680, f'Room: {user.room.name}')
     y_position -= 40
-    pdf.drawString(100, 660, f'Bed Space: {instance.user.space}')
+    pdf.drawString(100, 660, f'Bed Space: {user.space.name}')
 
     # Save the PDF to the buffer
     pdf.showPage()
