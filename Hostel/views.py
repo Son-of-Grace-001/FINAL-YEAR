@@ -273,7 +273,7 @@ def book_room(request):
     }
     return render(request, 'hostel/allocate_room.html', context)
 
-def generate_pdf(user):
+def generate_pdf(instance, user):
     # Create a BytesIO buffer to store the PDF content
     buffer = BytesIO()
 
@@ -286,11 +286,11 @@ def generate_pdf(user):
     y_position -= 40
     pdf.drawString(100, 780, f'Hostel: {user.hostel}')
     y_position -= 40
-    pdf.drawString(100, 760, f'Faculty: {user.faculty}')
+    pdf.drawString(100, 760, f'Faculty: {instance.user.faculty}')
     y_position -= 40
-    pdf.drawString(100, 740, f'Department: {user.department}')
+    pdf.drawString(100, 740, f'Department: {instance.user.department}')
     y_position -= 40
-    pdf.drawString(100, 720, f'Gender: {user.gender}')
+    pdf.drawString(100, 720, f'Gender: {instance.user.gender}')
     y_position -= 40
     pdf.drawString(100, 700, f'Block: {user.block}')
     y_position -= 40
