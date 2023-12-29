@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Room</title>
+    <link rel="stylesheet" href="{% static 'css/book_room' %}">
 </head>
 <body>
   <form method="post" enctype="multipart/form-data" action="{%  url 'payment' %}">
     {% csrf_token %}
-    <h1 class="info">Pls upload your evidence of payment</h1>
-    <p class="info-2">
+    <h1 class="confirm">Pls upload your evidence of payment</h1>
+    <p class="pp">
       Your evidence of payment is required to proceed to the next step to booking room
     </p>
 
