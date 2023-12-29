@@ -188,16 +188,17 @@ def generate_pdf(instance):
 
 
 def send_mail(instance):
-    if instance.status == 'APPROVED':
-        pdf_buffer = generate_pdf(instance)
-        subject = "Exeat Request Approved"
-    else:
-        subject = "Exeat Request Rejected"
-    body = f"Dear {instance.user.first_name} {instance.user.last_name} \n Faculty:{instance.user.faculty} \n Department: {instance.user.department} \n Parent Number: {instance.parent_number} \n Reason: {instance.reason} \n Your Exeat request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by An Admin"
-    mail = EmailMessage(subject= subject, body=body, from_email=settings.EMAIL_HOST_USER , to = [instance.user.email])
-    if instance.status == 'APPROVED':
-        mail.attach('Exeat.pdf', pdf_buffer.read(), 'application/pdf')
-    mail.send()
+    if instance.user is not None:
+        if instance.status == 'APPROVED':
+            pdf_buffer = generate_pdf(instance)
+            subject = "Exeat Request Approved"
+        else:
+            subject = "Exeat Request Rejected"
+        body = f"Dear {instance.user.first_name} {instance.user.last_name} \n Faculty:{instance.user.faculty} \n Department: {instance.user.department} \n Parent Number: {instance.parent_number} \n Reason: {instance.reason} \n Your Exeat request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by An Admin"
+        mail = EmailMessage(subject= subject, body=body, from_email=settings.EMAIL_HOST_USER , to = [instance.user.email])
+        if instance.status == 'APPROVED':
+            mail.attach('Exeat.pdf', pdf_buffer.read(), 'application/pdf')
+        mail.send()
 
 @login_required
 def upload_school_fee_evidence(request):
