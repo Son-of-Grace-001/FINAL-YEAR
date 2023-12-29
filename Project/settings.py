@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -99,28 +99,15 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 #     },
 # }
 
-# DATABASES = {
-#     "default": dj_database_url.parse(config("external_url")),
-#     # 'OPTIONS': {
-#     #         'sslmode': 'require',  # or 'verify-full' for stricter verification
-#     #         'sslrootcert': '/path/to/your/certificate.crt',
-#     #     }
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hosteldb',
-        'USER': 'hosteldb_user',
-        'PASSWORD': os.get.environ("password"),
-        'HOST': 'dpg-ckb1q99kms5s73a95lcg-a.oregon-postgres.render.com',
-        'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'require',  # or 'verify-full' for stricter verification
-            # 'sslrootcert': '/path/to/ca-cert.pem',  # replace with your CA certificate
-        },
-    }
+    "default": dj_database_url.parse(config("external_url")),
+    # 'OPTIONS': {
+    #         'sslmode': 'require',  # or 'verify-full' for stricter verification
+    #         'sslrootcert': '/path/to/your/certificate.crt',
+    #     }
 }
+
+
 
 
 
