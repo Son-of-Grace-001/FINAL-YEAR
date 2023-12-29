@@ -163,15 +163,19 @@ def generate_pdf(instance):
     y_position = 800
 
     pdf.drawString(100, y_position, f'Hello, {instance.user.first_name} {instance.user.last_name}')
-    y_position -= 20  # Adjust the y-coordinate for the next line
+    y_position -= 40  # Adjust the y-coordinate for the next line
     pdf.drawString(100, y_position, f'Faculty: {instance.user.faculty}')
-    y_position -= 20
+    y_position -= 40
     pdf.drawString(100, y_position, f'Department: {instance.user.department}')
-    y_position -= 20
+    y_position -= 40
     pdf.drawString(100, y_position, f'Parent Number: {instance.parent_number}')
-    y_position -= 20
+    y_position -= 40
     pdf.drawString(100, y_position, f'Reason: {instance.reason}')
-    y_position -= 20
+    y_position -= 40
+    pdf.drawString(100, y_position, f'Departure Date: {instance.departure_date}')
+    y_position -= 40
+    pdf.drawString(100, y_position, f'Return Date: {instance.return_date}')
+    y_position -= 40
     pdf.drawString(100, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by an Admin")
 
     # Save the PDF to the buffer
@@ -237,6 +241,22 @@ def book_room(request):
         user.bunk = bed_space.bunk
         user.space = bed_space
         user.save()
+
+        
+        # Generate PDF content and filename
+        pdf_content, pdf_filename = generate_pdf(user)
+
+        # Construct the email subject and body
+        subject = 'Room Allocation Confirmation'
+        message = 'Thank you for booking a room. Please find your room allocation details in the attached PDF.'
+
+        # Create the EmailMessage instance and attach the PDF
+        email = EmailMessage(subject, message, to=[user.email])
+        email.attach(pdf_filename, pdf_content.getvalue(), 'application/pdf')
+
+        # Send the email
+        email.send()
+
         messages.info(request, "Room Alocated successfully")
         return redirect('dashboard')
 
@@ -252,6 +272,35 @@ def book_room(request):
         'available_spaces': available_spaces
     }
     return render(request, 'hostel/allocate_room.html', context)
+
+def generate_pdf(user):
+    # Create a BytesIO buffer to store the PDF content
+    buffer = BytesIO()
+
+    # Create the PDF object, using the BytesIO buffer as its "file."
+    pdf = canvas.Canvas(buffer)
+
+    # Add content to the PDF
+    pdf.drawString(100, 800, f'Hello, {user.first_name} {user.last_name}')
+    pdf.drawString(100, 780, f'Hostel: {user.hostel.name}')
+    pdf.drawString(100, 760, f'Faculty: {user.faculty}')
+    pdf.drawString(100, 740, f'Department: {user.department}')
+    pdf.drawString(100, 720, f'Gender: {user.get_gender_display()}')
+    pdf.drawString(100, 700, f'Block: {user.block.name}')
+    pdf.drawString(100, 680, f'Room: {user.room.name}')
+    pdf.drawString(100, 660, f'Bed Space: {user.space.name}')
+
+    # Save the PDF to the buffer
+    pdf.showPage()
+    pdf.save()
+
+    # Construct a filename for the PDF
+    filename = f"{user.username}_room_allocation.pdf"
+
+    # File pointer to the beginning of the buffer
+    buffer.seek(0)
+
+    return buffer, filename
 
 
 @login_required
