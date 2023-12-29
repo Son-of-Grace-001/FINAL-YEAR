@@ -188,17 +188,16 @@ def generate_pdf(instance):
 
 
 def send_mail(instance):
-    if instance.user is not None:
-        if instance.status == 'APPROVED':
-            pdf_buffer = generate_pdf(instance)
-            subject = "Exeat Request Approved"
-        else:
-            subject = "Exeat Request Rejected"
-        body = f"Dear {instance.user.first_name} {instance.user.last_name} \n Faculty:{instance.user.faculty} \n Department: {instance.user.department} \n Parent Number: {instance.parent_number} \n Reason: {instance.reason} \n Your Exeat request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by An Admin"
-        mail = EmailMessage(subject= subject, body=body, from_email=settings.EMAIL_HOST_USER , to = [instance.user.email])
-        if instance.status == 'APPROVED':
-            mail.attach('Exeat.pdf', pdf_buffer.read(), 'application/pdf')
-        mail.send()
+    if instance.status == 'APPROVED':
+        pdf_buffer = generate_pdf(instance)
+        subject = "Exeat Request Approved"
+    else:
+        subject = "Exeat Request Rejected"
+    body = f"Dear {instance.user.first_name} {instance.user.last_name} \n Faculty:{instance.user.faculty} \n Department: {instance.user.department} \n Parent Number: {instance.parent_number} \n Reason: {instance.reason} \n Your Exeat request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by An Admin"
+    mail = EmailMessage(subject= subject, body=body, from_email=settings.EMAIL_HOST_USER , to = [instance.user.email])
+    if instance.status == 'APPROVED':
+        mail.attach('Exeat.pdf', pdf_buffer.read(), 'application/pdf')
+    mail.send()
 
 @login_required
 def upload_school_fee_evidence(request):
@@ -245,18 +244,18 @@ def book_room(request):
 
         
         # Generate PDF content and filename
-        pdf_content, pdf_filename = generate_pdf(user)
+        # pdf_content, pdf_filename = generate_pdf(user)
 
         # Construct the email subject and body
-        subject = 'Room Allocation Confirmation'
-        message = 'Thank you for booking a room. Please find your room allocation details in the attached PDF.'
+        # subject = 'Room Allocation Confirmation'
+        # message = 'Thank you for booking a room. Please find your room allocation details in the attached PDF.'
 
-        # Create the EmailMessage instance and attach the PDF
-        email = EmailMessage(subject, message, to=[user.email])
-        email.attach(pdf_filename, pdf_content.getvalue(), 'application/pdf')
+        # # Create the EmailMessage instance and attach the PDF
+        # email = EmailMessage(subject, message, to=[user.email])
+        # email.attach(pdf_filename, pdf_content.getvalue(), 'application/pdf')
 
-        # Send the email
-        email.send()
+        # # Send the email
+        # email.send()
 
         messages.info(request, "Room Alocated successfully")
         return redirect('dashboard')
@@ -274,42 +273,42 @@ def book_room(request):
     }
     return render(request, 'hostel/allocate_room.html', context)
 
-def generate_pdf(user):
-    # Create a BytesIO buffer to store the PDF content
-    buffer = BytesIO()
+# def generate_pdf(user):
+#     # Create a BytesIO buffer to store the PDF content
+#     buffer = BytesIO()
 
-    # Create the PDF object, using the BytesIO buffer as its "file."
-    pdf = canvas.Canvas(buffer)
+#     # Create the PDF object, using the BytesIO buffer as its "file."
+#     pdf = canvas.Canvas(buffer)
 
-    # Add content to the PDF
-    y_position = 800
-    pdf.drawString(100, 800, f'Hello, {user.first_name} {user.last_name}')
-    y_position -= 40
-    pdf.drawString(100, 760, f'Hostel: {user.hostel}')
-    y_position -= 40
-    pdf.drawString(100, 720, f'Faculty: {user.faculty}')
-    y_position -= 40
-    pdf.drawString(100, 680, f'Department: {user.department}')
-    y_position -= 40
-    pdf.drawString(100, 640, f'Gender: {user.gender}')
-    y_position -= 40
-    pdf.drawString(100, 600, f'Block: {user.block}')
-    y_position -= 40
-    pdf.drawString(100, 560, f'Room: {user.room}')
-    y_position -= 40
-    pdf.drawString(100, 520, f'Bed Space: {user.space}')
+#     # Add content to the PDF
+#     y_position = 800
+#     pdf.drawString(100, 800, f'Hello, {user.first_name} {user.last_name}')
+#     y_position -= 40
+#     pdf.drawString(100, 760, f'Hostel: {user.hostel}')
+#     y_position -= 40
+#     pdf.drawString(100, 720, f'Faculty: {user.faculty}')
+#     y_position -= 40
+#     pdf.drawString(100, 680, f'Department: {user.department}')
+#     y_position -= 40
+#     pdf.drawString(100, 640, f'Gender: {user.gender}')
+#     y_position -= 40
+#     pdf.drawString(100, 600, f'Block: {user.block}')
+#     y_position -= 40
+#     pdf.drawString(100, 560, f'Room: {user.room}')
+#     y_position -= 40
+#     pdf.drawString(100, 520, f'Bed Space: {user.space}')
 
-    # Save the PDF to the buffer
-    pdf.showPage()
-    pdf.save()
+#     # Save the PDF to the buffer
+#     pdf.showPage()
+#     pdf.save()
 
-    # Construct a filename for the PDF
-    filename = f"{user.username}_room_allocation.pdf"
+#     # Construct a filename for the PDF
+#     filename = f"{user.username}_room_allocation.pdf"
 
-    # File pointer to the beginning of the buffer
-    buffer.seek(0)
+#     # File pointer to the beginning of the buffer
+#     buffer.seek(0)
 
-    return buffer, filename
+#     return buffer, filename
 
 
 @login_required
