@@ -43,3 +43,27 @@ input{
   width: 120px;
   margin: auto;
 }
+
+@media only screen and (max-width:600px){
+  body{
+    padding: 20px;
+    background-color: #281470;
+
+  }
+
+  .mail{
+    width: 100%;
+    text-align: justify;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+  }
+
+  .Verify{
+    margin-top: 15px;
+  }
+
+  .text{
+    margin-bottom: 15px;
+  }
+}
