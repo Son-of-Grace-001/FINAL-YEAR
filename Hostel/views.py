@@ -282,7 +282,7 @@ def generate_pdf(instance):
 
     # Add content to the PDF
     y_position = 800
-    pdf.drawString(100, 800, f'Hello, {instance.user.first_name} {user.last_name}')
+    pdf.drawString(100, 800, f'Hello, {instance.user.first_name} {instance.user.last_name}')
     y_position -= 40
     pdf.drawString(100, 780, f'Hostel: {instance.user.hostel}')
     y_position -= 40
