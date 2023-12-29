@@ -160,12 +160,19 @@ def generate_pdf(instance):
     pdf = canvas.Canvas(buffer)
 
     # Add content to the PDF
-    pdf.drawString(100, 800, f'Hello, {instance.user.first_name} {instance.user.last_name}')
-    pdf.drawString(100, 800, f'Faculty: {instance.user.faculty}')
-    pdf.drawString(100, 800, f'Department: {instance.user.department}')
-    pdf.drawString(100, 800, f'Parent Number {instance.parent_number}')
-    pdf.drawString(100, 800, f'Reason: {instance.reason}')
-    pdf.drawString(100, 780, f"Your exeact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by An Admin")
+    y_position = 800
+
+    pdf.drawString(100, y_position, f'Hello, {instance.user.first_name} {instance.user.last_name}')
+    y_position -= 20  # Adjust the y-coordinate for the next line
+    pdf.drawString(100, y_position, f'Faculty: {instance.user.faculty}')
+    y_position -= 20
+    pdf.drawString(100, y_position, f'Department: {instance.user.department}')
+    y_position -= 20
+    pdf.drawString(100, y_position, f'Parent Number: {instance.parent_number}')
+    y_position -= 20
+    pdf.drawString(100, y_position, f'Reason: {instance.reason}')
+    y_position -= 20
+    pdf.drawString(100, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by an Admin")
 
     # Save the PDF to the buffer
     pdf.showPage()
@@ -174,6 +181,8 @@ def generate_pdf(instance):
     # File pointer to the beginning of the buffer
     buffer.seek(0)
     return buffer
+
+
 def send_mail(instance):
     if instance.status == 'APPROVED':
         pdf_buffer = generate_pdf(instance)
