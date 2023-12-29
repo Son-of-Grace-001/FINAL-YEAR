@@ -281,14 +281,22 @@ def generate_pdf(user):
     pdf = canvas.Canvas(buffer)
 
     # Add content to the PDF
+    y_position = 800
     pdf.drawString(100, 800, f'Hello, {user.first_name} {user.last_name}')
-    pdf.drawString(100, 780, f'Hostel: {user.hostel.name}')
+    y_position -= 40
+    pdf.drawString(100, 780, f'Hostel: {user.hostel}')
+    y_position -= 40
     pdf.drawString(100, 760, f'Faculty: {user.faculty}')
+    y_position -= 40
     pdf.drawString(100, 740, f'Department: {user.department}')
-    pdf.drawString(100, 720, f'Gender: {user.get_gender_display()}')
-    pdf.drawString(100, 700, f'Block: {user.block.name}')
-    pdf.drawString(100, 680, f'Room: {user.room.name}')
-    pdf.drawString(100, 660, f'Bed Space: {user.space.name}')
+    y_position -= 40
+    pdf.drawString(100, 720, f'Gender: {user.gender}')
+    y_position -= 40
+    pdf.drawString(100, 700, f'Block: {user.block}')
+    y_position -= 40
+    pdf.drawString(100, 680, f'Room: {user.room}')
+    y_position -= 40
+    pdf.drawString(100, 660, f'Bed Space: {user.space}')
 
     # Save the PDF to the buffer
     pdf.showPage()
