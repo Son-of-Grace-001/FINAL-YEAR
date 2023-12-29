@@ -114,7 +114,7 @@ CHOICE_FOR_EXEAT = (
 )
 class Exeat(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    parent_number = models.CharField(max_length=100 )
+    parent_number = models.FloatField()
     departure_date = models.DateField()
     return_date = models.DateField()
     reason = models.TextField()

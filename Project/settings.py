@@ -100,7 +100,11 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 # }
 
 DATABASES = {
-    "default": dj_database_url.parse(config("external_url"))
+    "default": dj_database_url.parse(config("external_url")),
+    # 'OPTIONS': {
+    #         'sslmode': 'require',  # or 'verify-full' for stricter verification
+    #         'sslrootcert': '/path/to/your/certificate.crt',
+    #     }
 }
 
 
