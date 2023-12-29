@@ -286,11 +286,11 @@ def generate_pdf(user):
     y_position -= 40
     pdf.drawString(100, 780, f'Hostel: {user.hostel}')
     y_position -= 40
-    pdf.drawString(100, 760, f'Faculty: {user.get_faculty_display()}')
+    pdf.drawString(100, 760, f'Faculty: {user.faculty}')
     y_position -= 40
-    pdf.drawString(100, 740, f'Department: {user.get_department_display()}')
+    pdf.drawString(100, 740, f'Department: {user.department}')
     y_position -= 40
-    pdf.drawString(100, 720, f'Gender: {user.get_gender_display()}')
+    pdf.drawString(100, 720, f'Gender: {user.gender}')
     y_position -= 40
     pdf.drawString(100, 700, f'Block: {user.block}')
     y_position -= 40
