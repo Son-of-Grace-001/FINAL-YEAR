@@ -284,19 +284,19 @@ def generate_pdf(user):
     y_position = 800
     pdf.drawString(100, 800, f'Hello, {user.first_name} {user.last_name}')
     y_position -= 40
-    pdf.drawString(100, 780, f'Hostel: {user.hostel}')
+    pdf.drawString(100, 760, f'Hostel: {user.hostel}')
     y_position -= 40
-    pdf.drawString(100, 780, f'Faculty: {user.faculty}')
+    pdf.drawString(100, 720, f'Faculty: {user.faculty}')
     y_position -= 40
-    pdf.drawString(100, 780, f'Department: {user.department}')
+    pdf.drawString(100, 680, f'Department: {user.department}')
     y_position -= 40
-    pdf.drawString(100, 780, f'Gender: {user.gender}')
+    pdf.drawString(100, 640, f'Gender: {user.gender}')
     y_position -= 40
-    pdf.drawString(100, 780, f'Block: {user.block}')
+    pdf.drawString(100, 600, f'Block: {user.block}')
     y_position -= 40
-    pdf.drawString(100, 780, f'Room: {user.room}')
+    pdf.drawString(100, 560, f'Room: {user.room}')
     y_position -= 40
-    pdf.drawString(100, 780, f'Bed Space: {user.space}')
+    pdf.drawString(100, 520, f'Bed Space: {user.space}')
 
     # Save the PDF to the buffer
     pdf.showPage()
