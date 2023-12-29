@@ -303,7 +303,7 @@ def generate_pdf(user):
     pdf.save()
 
     # Construct a filename for the PDF
-    filename = f"{instance.user.username}_room_allocation.pdf"
+    filename = f"{user.username}_room_allocation.pdf"
 
     # File pointer to the beginning of the buffer
     buffer.seek(0)
