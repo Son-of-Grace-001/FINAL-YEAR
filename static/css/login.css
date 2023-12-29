@@ -19,6 +19,10 @@ form{
   height: 16px;
 }
 
+#id_password_helptext > a{
+  text-align: right;
+}
+
 .password-reset-link {
   /* Add your styles, such as color, text-decoration, etc. */
   text-align: right;
