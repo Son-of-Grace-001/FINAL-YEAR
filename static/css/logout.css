@@ -48,15 +48,29 @@ input{
   body{
     padding: 20px;
     background-color: #281470;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height:100vh;
 
   }
 
-  .mail{
-    width: 100%;
-    text-align: justify;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
+  form{
+    width:100%;
+    margin:0;
+    background-color:#fff;
+    padding:20px;
+  }
+
+  input{
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    border: 1px solid #281470;
+    text-align: center;
+    text-transform: capitalize;
+    color: #fff;
+  
   }
 
   .Verify{
