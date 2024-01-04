@@ -67,6 +67,7 @@ input{
     width: 120px;
     border-radius: 10px;
     border: 1px solid #281470;
+    background-color: #281470;
     text-align: center;
     text-transform: capitalize;
     color: #fff;
