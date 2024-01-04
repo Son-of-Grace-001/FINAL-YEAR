@@ -13,8 +13,7 @@ class UserAdmin(admin.ModelAdmin):
                     'faculty', 'department', 'gender',
                     'hostel', 'block', 'room', 'bunk', 'space')
     search_fields =  ('first_name', 'last_name', 'matric_number',
-                    'faculty__name', 'department__name', 'gender__name',
-                    'hostel__name', 'block__name', 'room__name', 'bunk__name', 'space__name')
+                    'faculty__name')
     list_per_page = 20
 admin.site.register(CustomUser, UserAdmin)
 
