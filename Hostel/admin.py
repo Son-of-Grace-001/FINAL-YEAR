@@ -4,7 +4,7 @@ from django.contrib import admin
 # admin.py in your app
 
 from django.contrib import admin
-from .models import CustomUser
+from .models import CustomUser, Level
 from .models import Faculty, Department,Amount, Gender, Hostel, Room, Block, Bunk, BedSpace,Complaint, Exeat, Upload
 
 class UserAdmin(admin.ModelAdmin):
@@ -40,4 +40,5 @@ admin.site.register(Bunk)
 admin.site.register(BedSpace)
 admin.site.register(Upload)
 admin.site.register(Amount)
+admin.site.register(Level)
 
