@@ -4,7 +4,7 @@ from .models import Hostel, Room, Bunk, Block
 
 from allauth.account.forms import SignupForm
 from django import forms
-from .models import Faculty, Department, Gender, CustomUser
+from .models import Faculty, Department, Gender, CustomUser, Level
 from django.core.validators import FileExtensionValidator, ValidationError
 
 class CustomSignupForm(SignupForm):
@@ -14,7 +14,7 @@ class CustomSignupForm(SignupForm):
     gender = forms.ModelChoiceField(queryset=Gender.objects.all(), empty_label="Select Gender", required=True)
     faculty = forms.ModelChoiceField(queryset=Faculty.objects.all(), empty_label="Select Faculty", required=True)
     department = forms.ModelChoiceField(queryset=Department.objects.all(), empty_label="Select Department", required=True)
-    level = forms.ModelChoiceField(queryset=Department.objects.all(), empty_label="Select Level", required=True)
+    level = forms.ModelChoiceField(queryset=Level.objects.all(), empty_label="Select Level", required=True)
     phone_number = forms.CharField(max_length=20, required=True)
     profile_image = forms.ImageField(validators=[
     FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])  # 1 MB limit
@@ -36,6 +36,7 @@ class CustomSignupForm(SignupForm):
         user.faculty = self.cleaned_data['faculty']
         user.department = self.cleaned_data['department']
         user.profile_image = self.cleaned_data['profile_image']
+        user.level = self.cleaned_data['level']
 
         user.save()
 
