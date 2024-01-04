@@ -88,8 +88,6 @@ class BedSpace(models.Model):
     bunk = models.ForeignKey(Bunk, on_delete=models.CASCADE, default='1')
     position = models.CharField(max_length=4, choices=[('Up', 'Up'), ('Down', 'Down')])
     is_allocated= models.BooleanField(default=False)
-    class Meta:
-        unique_together = ('bunk', 'position')
     def __str__(self):
         return self.position
 
