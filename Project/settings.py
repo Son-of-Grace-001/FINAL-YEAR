@@ -37,10 +37,10 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
