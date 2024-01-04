@@ -103,7 +103,9 @@ class BedSpace(models.Model):
         return self.position
 
 class Complaint (models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     title = models.CharField(max_length = 100)
     block_number = models.CharField(max_length = 100)
     room_number = models.CharField(max_length = 100)

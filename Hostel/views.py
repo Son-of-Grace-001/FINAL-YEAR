@@ -71,17 +71,29 @@ def complaint(request):
         message = request.POST['message']
         image = request.FILES['image']
         hostel_name = request.POST['hostel_name']
+        fname = request.FILES['fname']
+        lname = request.POST['lname']
 
         complaint = Complaint.objects.create(
-            user = request.user,
             title=title,
             block_number=block_number,
             room_number=room_number,
             message=message,
             image=image,
-            hostel_name=hostel_name
+            hostel_name=hostel_name,
+            first_name = fname,
+            last_name =lname
         )
         complaint.save()
+
+        context = {
+            'fname': user.first_name,
+            'lname': user.last_name,
+            'room_num': user.room,
+            'block_num': user.block,
+            'hostel': user.hostel
+
+        }
 
         if request.user.is_authenticated:
             user_first_name = request.user.first_name
@@ -108,7 +120,7 @@ def complaint(request):
         messages.success(request, 'Complaint submitted successfully.')
         return redirect('dashboard')  # Redirect to a success page
 
-    return render(request, 'hostel/complaint.html')
+    return render(request, 'hostel/complaint.html', context)
 
 @login_required
 def book_pass(request):
