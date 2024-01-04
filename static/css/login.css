@@ -107,6 +107,10 @@ li{
   body{
     padding: 20px;
     background-color: #281470;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height:100vh;
   }
 
   form{
@@ -116,4 +120,5 @@ li{
     padding: 20px;
     margin-top: 10px;
   }
+
 }

@@ -5,8 +5,19 @@ from django.contrib import admin
 
 from django.contrib import admin
 from .models import CustomUser
-
 from .models import Faculty, Department,Amount, Gender, Hostel, Room, Block, Bunk, BedSpace,Complaint, Exeat, Upload
+
+class UserAdmin(admin.ModelAdmin):
+  
+    list_display = ('first_name', 'last_name', 'matric_number',
+                    'faculty', 'department', 'gender',
+                    'hostel', 'block', 'room', 'bunk', 'space')
+    search_field =  ('first_name', 'last_name', 'matric_number',
+                    'faculty', 'department', 'gender',
+                    'hostel', 'block', 'room', 'bunk', 'space')
+    list_per_page = 20
+admin.site.register(CustomUser, UserAdmin)
+
 
 admin.site.register(Faculty)
 admin.site.register(Department)
@@ -21,3 +32,4 @@ admin.site.register(Complaint)
 admin.site.register(Exeat)
 admin.site.register(Upload)
 admin.site.register(Amount)
+
