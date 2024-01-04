@@ -12,7 +12,7 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'matric_number',
                     'faculty', 'department', 'gender',
                     'hostel', 'block', 'room', 'bunk', 'space')
-    search_field =  ('first_name', 'last_name', 'matric_number',
+    search_fields =  ('first_name', 'last_name', 'matric_number',
                     'faculty', 'department', 'gender',
                     'hostel', 'block', 'room', 'bunk', 'space')
     list_per_page = 20
