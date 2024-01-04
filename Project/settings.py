@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -201,4 +202,20 @@ CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
     'API_KEY': '912634288932877',
     'API_SECRET': os.environ.get('API_SECRET')
+}
+
+
+JAZZMIN_SETTINGS = {
+    'site_title': 'Adeleke University Hostel Website',
+    'site_header': 'Adeleke University Hostel Website',
+    'welcome_sign': 'Welcome to My Adeleke Hostel Website',
+    "site_logo": "img/logo one.jpeg",
+     "login_logo": "img/logo one.jpeg",
+     "site_logo_classes": "img-circle",
+     "copyright": "olajire 2024",
+    'show_sidebar': True,
+    'related_modal_active': True,
+    'changeform_format': 'stacked',
+    'show_ui_builder': True,
+    'navigation_expanded': False,
 }
