@@ -28,6 +28,13 @@ class Gender(models.Model):
     def __str__(self):
         return self.name
 
+class Level (models.Model):
+    name = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.name
+    
+
 class CustomUser(AbstractUser):
     matric_number = models.CharField(max_length=15, blank=True, null=True)
     department = models.ForeignKey('Department', on_delete=models.SET_NULL, null=True)
@@ -39,6 +46,8 @@ class CustomUser(AbstractUser):
     room = models.ForeignKey('Room', on_delete=models.SET_NULL, null=True)
     bunk = models.ForeignKey('Bunk', on_delete=models.SET_NULL, null=True)
     space = models.ForeignKey('BedSpace', on_delete=models.SET_NULL, null=True)
+    level = models.ForeignKey('Level', on_delete=models.SET_NULL, null=True)
+    phone_number = models.CharField(max_length=20)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -94,6 +103,7 @@ class BedSpace(models.Model):
         return self.position
 
 class Complaint (models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length = 100)
     block_number = models.CharField(max_length = 100)
     room_number = models.CharField(max_length = 100)

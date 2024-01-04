@@ -63,6 +63,7 @@ def edit_profile(request):
 
 @login_required
 def complaint(request):
+    user = request.user
     if request.method == 'POST':
         title = request.POST['title']
         block_number = request.POST['block_number']

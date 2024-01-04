@@ -14,12 +14,14 @@ class CustomSignupForm(SignupForm):
     gender = forms.ModelChoiceField(queryset=Gender.objects.all(), empty_label="Select Gender", required=True)
     faculty = forms.ModelChoiceField(queryset=Faculty.objects.all(), empty_label="Select Faculty", required=True)
     department = forms.ModelChoiceField(queryset=Department.objects.all(), empty_label="Select Department", required=True)
+    level = forms.ModelChoiceField(queryset=Department.objects.all(), empty_label="Select Level", required=True)
+    phone_number = forms.CharField(max_length=20, required=True)
     profile_image = forms.ImageField(validators=[
     FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])  # 1 MB limit
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2', 'gender', 'matric_number', 'department', 'profile_image']
+        fields = ['username', 'email', 'password1', 'password2', 'gender', 'matric_number', 'faculty', 'department', 'level', 'phone_number' 'profile_image']
 
 
     def save(self, request):
@@ -50,6 +52,6 @@ class EditProfileForm(ModelForm):
     department = forms.ModelChoiceField(queryset=Department.objects.all(), empty_label="Select Department", required=True)
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'email', 'profile_image', 'matric_number', 'faculty', 'gender', 'department']
+        fields = ['first_name', 'last_name', 'email', 'profile_image', 'matric_number', 'faculty', 'gender', 'department', 'level', 'phone_number']
 
 
