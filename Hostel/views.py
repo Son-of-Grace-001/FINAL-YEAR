@@ -73,7 +73,7 @@ def complaint(request):
         hostel_name = request.POST['hostel_name']
 
         complaint = Complaint.objects.create(
-            user,
+            user = request.user,
             title=title,
             block_number=block_number,
             room_number=room_number,
