@@ -24,7 +24,7 @@ class PassAdmin(admin.ModelAdmin):
 admin.site.register(Exeat, PassAdmin)
 
 class ReportAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name' 'block_number', 'room_number',
+    list_display = ('fname', 'lname', 'block_number', 'room_number',
                     'title', 'message', 'hostel_name')
     search_fields =  ( 'block_number', 'room_number', 'hostel')
     list_per_page = 100

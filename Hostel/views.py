@@ -81,8 +81,8 @@ def complaint(request):
             message=message,
             image=image,
             hostel_name=hostel_name,
-            first_name = fname,
-            last_name =lname
+            fname = fname,
+            lname =lname
         )
         complaint.save()
 
