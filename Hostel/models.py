@@ -30,9 +30,9 @@ class Gender(models.Model):
 
 class CustomUser(AbstractUser):
     matric_number = models.CharField(max_length=15, blank=True, null=True)
-    department = models.CharField(max_length=100, blank=True, null=True)
-    faculty = models.CharField(max_length=100, blank=True, null=True)
-    gender = models.CharField(max_length=10, blank=True, null=True)
+    department = models.ForeignKey('Department', on_delete=models.SET_NULL, null=True)
+    faculty = models.ForeignKey('Faculty', on_delete=models.SET_NULL, null=True)
+    gender = models.ForeignKey('Gender', on_delete=models.SET_NULL, null=True)
     profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
     hostel = models.ForeignKey('Hostel', on_delete=models.SET_NULL, null=True)
     block = models.ForeignKey('Block', on_delete=models.SET_NULL, null=True)
