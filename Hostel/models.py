@@ -128,8 +128,12 @@ class Exeat(models.Model):
     departure_date = models.DateField()
     return_date = models.DateField()
     reason = models.TextField()
+    department = models.CharField(max_length=100)
+    faculty = models.CharField(max_length=100)
+    level = models.CharField(max_length=10)
+    student_number = models.CharField(max_length=20)
     status = models.CharField(max_length=10, choices=CHOICE_FOR_EXEAT, default=CHOICE_FOR_EXEAT[0][0])
-
+    
     def __str__(self):
         return f"{self.user} - {self.departure_date} to {self.return_date}"
 

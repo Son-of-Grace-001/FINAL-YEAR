@@ -16,9 +16,10 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(CustomUser, UserAdmin)
 
 class PassAdmin(admin.ModelAdmin):
-    list_display = ('user', 'parent_number', 'departure_date',
+    list_display = ('user', 'faculty', 'department', 
+                    'student_number', 'parent_number', 'departure_date',
                     'return_date', 'reason', 'status')
-    search_fields =  ('parent_number', 'user__first_name')
+    search_fields =  ('parent_number', 'student_number')
     list_per_page = 100
 admin.site.register(Exeat, PassAdmin)
 

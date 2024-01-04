@@ -111,20 +111,37 @@ def complaint(request):
 
 @login_required
 def book_pass(request):
+    user = request.user
     if request.method == 'POST':
         departure_date = request.POST.get('departure_date')
         return_date = request.POST.get('return_date')
         reason = request.POST.get('reason')
         parent_number = request.POST ['parent_number']
+        department = request.POST.get('department')
+        faculty = request.POST.get('faculty')
+        level = request.POST.get('level')
+        student_number = request.POST ['student_number']
 
         exeat = Exeat.objects.create(
             user=request.user,
             departure_date=departure_date,
             return_date=return_date,
             reason=reason,
-            parent_number = parent_number
+            parent_number = parent_number,
+            faculty = faculty,
+            department = department,
+            level = level,
+            student_number = student_number
+
         )
         exeat.save()
+
+        context = {
+            'fac': user.faculty,
+            'dep': user.department,
+            'level': user.level,
+            'student_num': user.phone_number
+        }
 
         if request.user.is_authenticated:
             user_first_name = request.user.first_name
@@ -149,7 +166,7 @@ def book_pass(request):
         messages.success(request, 'Exeat request submitted successfully.')
         return redirect('dashboard')
 
-    return render(request, 'hostel/book_pass.html')
+    return render(request, 'hostel/book_pass.html', context)
 
 
 
@@ -165,9 +182,13 @@ def generate_pdf(instance):
 
     pdf.drawString(100, y_position, f'Hello, {instance.user.first_name} {instance.user.last_name}')
     y_position -= 40  # Adjust the y-coordinate for the next line
-    pdf.drawString(100, y_position, f'Faculty: {instance.user.faculty}')
+    pdf.drawString(100, y_position, f'Faculty: {instance.faculty}')
     y_position -= 40
-    pdf.drawString(100, y_position, f'Department: {instance.user.department}')
+    pdf.drawString(100, y_position, f'Department: {instance.department}')
+    y_position -= 40
+    pdf.drawString(100, y_position, f'Level: {instance.level}')
+    y_position -= 40
+    pdf.drawString(100, y_position, f'Student Number: {instance.parent_number}')
     y_position -= 40
     pdf.drawString(100, y_position, f'Parent Number: {instance.parent_number}')
     y_position -= 40
