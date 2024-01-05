@@ -253,6 +253,7 @@ def book_room(request):
     # if user already have an hostel allocated to them, they should be redirected to home page
     if user.hostel or user.block or user.room:
         return redirect('home')
+    print(user.gender)
     if user.gender == "1":
         gender = 'male'
     else:
