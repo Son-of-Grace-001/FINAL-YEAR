@@ -243,6 +243,7 @@ def generate_pdf(instance):
     pdf.drawString(50, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been \n {instance.status.title()} by an Admin")
     y_position -=100
 
+    
     obj_qr = qrcode.QRCode(
         version = 1,
         error_correction = qrcode.constants.ERROR_CORRECT_L,
@@ -260,7 +261,7 @@ def generate_pdf(instance):
 
     qr_img.save("qr-img.png")
 
-    pdf.drawInlineImage("qr-img.png", x_position, y_position - 80, width=100, height=100)
+    pdf.drawInlineImage("qr-img.png", 100, y_position - 80, width=100, height=100)
 
 
     # Save the PDF to the buffer
