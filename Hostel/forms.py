@@ -21,7 +21,7 @@ class CustomSignupForm(SignupForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2', 'gender', 'matric_number', 'faculty', 'department', 'level', 'phone_number' 'profile_image']
+        fields = ['username', 'email', 'password1', 'password2', 'gender', 'matric_number', 'faculty', 'department', 'level', 'phone_number', 'profile_image']
 
 
     def save(self, request):
