@@ -125,6 +125,7 @@ def complaint(request):
 @login_required
 def book_pass(request):
     user = request.user
+    context = {}
     if request.method == 'POST':
         departure_date = request.POST.get('departure_date')
         return_date = request.POST.get('return_date')
