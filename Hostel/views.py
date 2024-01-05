@@ -64,6 +64,13 @@ def edit_profile(request):
 @login_required
 def complaint(request):
     user = request.user
+    context = {
+        'fname': user.first_name,
+        'lname': user.last_name,
+        'room_num': user.room,
+        'block_num': user.block,
+        'hostel': user.hostel
+    }
     if request.method == 'POST':
         title = request.POST['title']
         block_number = request.POST['block_number']
@@ -85,14 +92,6 @@ def complaint(request):
             lname =lname
         )
         complaint.save()
-        context = {
-            'fname': user.first_name,
-            'lname': user.last_name,
-            'room_num': user.room,
-            'block_num': user.block,
-            'hostel': user.hostel
-
-        }
 
 
         if request.user.is_authenticated:
@@ -131,7 +130,7 @@ def book_pass(request):
         'level': user.level,
         'student_num': user.phone_number
     }
-    
+
     if request.method == 'POST':
         departure_date = request.POST.get('departure_date')
         return_date = request.POST.get('return_date')
