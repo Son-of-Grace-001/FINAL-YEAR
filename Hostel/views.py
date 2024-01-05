@@ -413,6 +413,8 @@ def get_pdf(user):
     y_position -= 40
     pdf.drawString(50, y_position, f'Room: {user.room}')
     y_position -= 40
+    pdf.drawString(50, y_position, f'Bunk: {user.bunk}')
+    y_position -= 40
     pdf.drawString(50, y_position, f'Bed Space: {user.space}')
 
     y_position -=100
@@ -425,7 +427,7 @@ def get_pdf(user):
     )
 
     obj_qr.add_data(
-        f"Name: {user.first_name} {user.last_name}\nFaculty: {user.faculty}\nDepartment: {user.department}\nLevel: {user.level}\n Gender: {user.gender}\n Hostel: {user.hostel}\n Block: {user.block}\n Room: {user.room}\n Bed Space: {user.space}"
+        f"Name: {user.first_name} {user.last_name}\nFaculty: {user.faculty}\nDepartment: {user.department}\nLevel: {user.level}\n Gender: {user.gender}\n Hostel: {user.hostel}\n Block: {user.block}\n Room: {user.room}\n Bunk: {user.bunk} \n Bed Space: {user.space}"
     
     )
     obj_qr.make(fit = True)
