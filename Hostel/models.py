@@ -120,7 +120,7 @@ class Complaint (models.Model):
 
 
 CHOICE_FOR_EXEAT = (
-    ("PENDING", 'Exect request is pending'),
+    ("PENDING", 'Exeact request is pending'),
     ("APPROVED", 'Approved by admin'),
     ("REJECTED", 'Rejected by Admin')
 )

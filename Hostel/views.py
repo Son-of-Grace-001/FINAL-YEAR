@@ -14,6 +14,7 @@ from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, Http404
 import requests
+import qrcode
 from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
@@ -192,9 +193,9 @@ def generate_pdf(instance):
     # Create the PDF object, using the BytesIO buffer as its "file."
     pdf = canvas.Canvas(buffer, pagesize=letter)
 
-    pdf.setFont("Helvetica-Bold", 16)
+    pdf.setFont("Helvetica-Bold", 25)
     school_name = "Adeleke University Ede, Osun State"
-    text_width = pdf.stringWidth(school_name, "Helvetica-Bold", 16)
+    text_width = pdf.stringWidth(school_name, "Helvetica-Bold", 25)
     x_position = (letter[0] - text_width) / 2
     y_position = 750
 
@@ -202,7 +203,7 @@ def generate_pdf(instance):
     pdf.drawString(x_position, y_position, school_name)
 
     # Set font and size for the content
-    pdf.setFont("Helvetica", 12)
+    pdf.setFont("Helvetica", 18)
 
     # Add existing content to the PDF
     y_position -= 40
@@ -228,6 +229,21 @@ def generate_pdf(instance):
     pdf.drawString(100, y_position, f'Return Date: {instance.return_date}')
     y_position -= 40
     pdf.drawString(100, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by an Admin")
+
+     # Generate QR code
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(f"Name: {instance.user.first_name} {instance.user.last_name}\n Faculty: {instance.faculty}\nDepartment: {instance.department}\nLevel: {instance.level}\nStudent Number: {instance.student_number}\n Parent Number: {instance.parent_number}\n Reason: {instance.reason}\n Departure Date: {instance.departure_date}\n Return Date: {instance.return_date} ")
+    qr.make(fit=True)
+    qr_img = qr.make_image(fill_color="black", back_color="white")
+
+    # Draw the QR code on the PDF
+    qr_img.save("/path/to/qr_code.png")  # Save the QR code image (replace with your path)
+    pdf.drawInlineImage("image/qr_code.png", 100, y_position - 80, width=80, height=80)
 
     # Save the PDF to the buffer
     pdf.showPage()
@@ -330,7 +346,22 @@ def get_pdf(user):
     buffer = BytesIO()
 
     # Create the PDF object, using the BytesIO buffer as its "file."
-    pdf = canvas.Canvas(buffer)
+    pdf = canvas.Canvas(buffer, pagesize=letter)
+
+    pdf.setFont("Helvetica-Bold", 25)
+    school_name = "Adeleke University Ede, Osun State"
+    text_width = pdf.stringWidth(school_name, "Helvetica-Bold", 25)
+    x_position = (letter[0] - text_width) / 2
+    y_position = 750
+
+    # Add the school name
+    pdf.drawString(x_position, y_position, school_name)
+
+    # Set font and size for the content
+    pdf.setFont("Helvetica", 18)
+
+    # Add existing content to the PDF
+    y_position -= 40
 
     # Add content to the PDF
     y_position = 800
@@ -349,6 +380,21 @@ def get_pdf(user):
     pdf.drawString(100, 560, f'Room: {user.room}')
     y_position -= 40
     pdf.drawString(100, 520, f'Bed Space: {user.space}')
+
+      # Generate QR code
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(f"Name: {user.first_name} {user.last_name}\n Faculty: {user.faculty}\nDepartment: {user.department}\n Gender: {user.gender}\n Block: {user.block}\n Room: {user.room}\n Space: {user.space}\n Hostel: {user.hostel}")
+    qr.make(fit=True)
+    qr_img = qr.make_image(fill_color="black", back_color="white")
+
+    # Draw the QR code on the PDF
+    qr_img.save("/path/to/qr_code.png")  # Save the QR code image (replace with your path)
+    pdf.drawInlineImage("image/qr_code.png", 100, y_position - 80, width=80, height=80)
 
     # Save the PDF to the buffer
     pdf.showPage()
