@@ -378,13 +378,13 @@ def get_pdf(user):
     # Add the school name
     pdf.drawString(x_position, y_position, school_name)
 
-    y_position -= 40
+    y_position -= 50
 
     pdf.setFont("Helvetica-Bold", 20)
     clearance_name = "Student's Hostel Clearance"
     text_width = pdf.stringWidth(clearance_name, "Helvetica-Bold", 25)
     x_position = (letter[0] - text_width) / 2
-    y_position = 750
+    y_position = 700
 
     # Add the school name
     pdf.drawString(x_position, y_position, clearance_name)
@@ -393,27 +393,27 @@ def get_pdf(user):
     pdf.setFont("Helvetica", 15)
 
     # Add existing content to the PDF
-    y_position -= 40
+    y_position -= 50
 
     # Add content to the PDF
-    y_position = 800
-    pdf.drawString(50, 800, f'Hello, {user.first_name} {user.last_name}')
+    
+    pdf.drawString(50, y_position, f'Hello, {user.first_name} {user.last_name}')
     y_position -= 40
-    pdf.drawString(50, 760, f'Hostel: {user.hostel}')
+    pdf.drawString(50, y_position, f'Hostel: {user.hostel}')
     y_position -= 40
-    pdf.drawString(50, 720, f'Faculty: {user.faculty}')
+    pdf.drawString(50, y_position, f'Faculty: {user.faculty}')
     y_position -= 40
-    pdf.drawString(50, 680, f'Department: {user.department}')
+    pdf.drawString(50, y_position, f'Department: {user.department}')
     y_position -= 40
-    pdf.drawString(50, 680, f'Level: {user.level}')
+    pdf.drawString(50, y_position, f'Level: {user.level}')
     y_position -= 40
-    pdf.drawString(50, 640, f'Gender: {user.gender}')
+    pdf.drawString(50, y_position, f'Gender: {user.gender}')
     y_position -= 40
-    pdf.drawString(50, 600, f'Block: {user.block}')
+    pdf.drawString(50, y_position, f'Block: {user.block}')
     y_position -= 40
-    pdf.drawString(50, 560, f'Room: {user.room}')
+    pdf.drawString(50, y_position, f'Room: {user.room}')
     y_position -= 40
-    pdf.drawString(50, 520, f'Bed Space: {user.space}')
+    pdf.drawString(50, y_position, f'Bed Space: {user.space}')
 
     y_position -=100
 
