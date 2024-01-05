@@ -74,7 +74,7 @@ class Block(models.Model):
     # Add any other relevant fields
 
     def __str__(self):
-        return self.name
+        return f"{self.hostel} - {self.name}"
 
 class Room(models.Model):
     block = models.ForeignKey(Block, on_delete=models.CASCADE)
@@ -82,7 +82,7 @@ class Room(models.Model):
     # Add any other relevant fields
 
     def __str__(self):
-        return self.name
+        return f"{self.block} - {self.name}"
 
 class Bunk(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
@@ -91,7 +91,7 @@ class Bunk(models.Model):
     # Add any other relevant fields
 
     def __str__(self):
-        return self.name
+        return f"{self.room} - {self.name}"
 
 class BedSpace(models.Model):
     bunk = models.ForeignKey(Bunk, on_delete=models.CASCADE, default='1')
@@ -100,7 +100,7 @@ class BedSpace(models.Model):
     class Meta:
         unique_together = ('bunk', 'position')
     def __str__(self):
-        return self.position
+        return f"{self.bunk} - {self.position}"
 
 class Complaint (models.Model):
     # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -159,8 +159,9 @@ class Upload(models.Model):
 
 
 class Amount(models.Model):
+    name = models.CharField(max_length=10)
     price = models.IntegerField()
     created = models.DateTimeField(auto_now_add = True)
     
     def __str__(self):
-        return self.price
+        return self.name
