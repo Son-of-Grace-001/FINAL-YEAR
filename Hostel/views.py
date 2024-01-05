@@ -240,7 +240,9 @@ def generate_pdf(instance):
     y_position -= 40
     pdf.drawString(50, y_position, f'Return Date: {instance.return_date}')
     y_position -= 40
-    pdf.drawString(50, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been \n {instance.status.title()} by an Admin")
+    pdf.drawString(50, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by the")
+    y_position -= 10
+    pdf.drawString(50, y_position, 'Hall Administrator')
     y_position -=100
 
     
@@ -261,7 +263,7 @@ def generate_pdf(instance):
 
     qr_img.save("qr-img.png")
 
-    pdf.drawInlineImage("qr-img.png", 100, y_position - 80, width=100, height=100)
+    pdf.drawInlineImage("qr-img.png", 250, y_position - 80, width=100, height=100)
 
 
     # Save the PDF to the buffer
@@ -432,7 +434,7 @@ def get_pdf(user):
 
     qr_img.save("qr-img.png")
 
-    pdf.drawInlineImage("qr-img.png", x_position, y_position - 80, width=100, height=100)
+    pdf.drawInlineImage("qr-img.png", 250, y_position - 80, width=100, height=100)
 
     # Save the PDF to the buffer
     pdf.showPage()
