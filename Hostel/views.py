@@ -14,6 +14,7 @@ from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, Http404
 import requests
+import os
 import qrcode
 from io import BytesIO
 from reportlab.pdfgen import canvas
@@ -242,9 +243,10 @@ def generate_pdf(instance):
     qr_img = qr.make_image(fill_color="black", back_color="white")
 
     # Draw the QR code on the PDF
-    save_path = "qrfile/qr_code.png"
-    qr_img.save(save_path)  # Save the QR code image (replace with your path)
-    pdf.drawInlineImage(save_path, 100, y_position - 80, width=80, height=80)
+    save_path = "qrfile/qr-code.png"  # Use the correct file path
+    qr_img.save(os.path.join(settings.MEDIA_ROOT, save_path))  # Save the QR code image
+    pdf.drawInlineImage(os.path.join(settings.MEDIA_ROOT, save_path), 100, y_position - 80, width=80, height=80)
+
 
     # Save the PDF to the buffer
     pdf.showPage()
