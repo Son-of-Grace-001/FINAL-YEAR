@@ -241,7 +241,7 @@ def generate_pdf(instance):
     pdf.drawString(50, y_position, f'Return Date: {instance.return_date}')
     y_position -= 40
     pdf.drawString(50, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by the")
-    y_position -= 10
+    y_position -= 15
     pdf.drawString(50, y_position, 'Hall Administrator')
     y_position -=100
 
