@@ -206,7 +206,7 @@ def generate_pdf(instance):
     y_position -= 50
 
     pdf.setFont("Helvetica-Bold", 20)
-    clearance_name = "Student's Exeact Clearance"
+    clearance_name = "Student's Pass Clearance"
     text_width = pdf.stringWidth(clearance_name, "Helvetica-Bold", 20)
     x_position = (letter[0] - text_width) / 2
     y_position = 700
@@ -215,7 +215,7 @@ def generate_pdf(instance):
     pdf.drawString(x_position, y_position, clearance_name)
 
     # Set font and size for the content
-    pdf.setFont("Helvetica", 11)
+    pdf.setFont("Helvetica", 15)
 
     # Add existing content to the PDF
     y_position -= 50
@@ -241,6 +241,23 @@ def generate_pdf(instance):
     pdf.drawString(50, y_position, f'Return Date: {instance.return_date}')
     y_position -= 40
     pdf.drawString(50, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by an Admin")
+
+    obj_qr = qrcode.QRCode(
+        version = 1,
+        error_correction = qrcode.constants.ERROR_CORRECT_L,
+        box_size = 10,
+        border = 4,
+    )
+
+    obj_qr.add_data(
+        f"Name: {instance.user.first_name} {instance.user.last_name}\nFaculty: {instance.faculty}\nDepartment: {instance.department}\nLevel: {instance.level}\nStudent Number: {instance.student_number}\nParent Number: {instance.parent_number}\nReason: {instance.reason}\nDeparture Date: {instance.departure_date}\nReturn Date: {instance.return_date}"
+    
+    )
+    obj_qr.make(fit = True)
+
+    qr_img = obj_qr.make_image(fill_color = "black", back_color = "white")
+
+    qr_img.save("qr-img.png")
 
 
     # Save the PDF to the buffer
@@ -358,7 +375,7 @@ def get_pdf(user):
     y_position -= 40
 
     pdf.setFont("Helvetica-Bold", 20)
-    clearance_name = "Student Hostel Clearance"
+    clearance_name = "Student's Hostel Clearance"
     text_width = pdf.stringWidth(clearance_name, "Helvetica-Bold", 25)
     x_position = (letter[0] - text_width) / 2
     y_position = 750
@@ -367,7 +384,7 @@ def get_pdf(user):
     pdf.drawString(x_position, y_position, clearance_name)
 
     # Set font and size for the content
-    pdf.setFont("Helvetica", 18)
+    pdf.setFont("Helvetica", 15)
 
     # Add existing content to the PDF
     y_position -= 40
