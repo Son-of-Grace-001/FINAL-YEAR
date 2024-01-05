@@ -204,7 +204,7 @@ def generate_pdf(instance):
     pdf.drawString(x_position, y_position, school_name)
 
     # Set font and size for the content
-    pdf.setFont("Helvetica", 18)
+    pdf.setFont("Helvetica", 14)
 
     # Add existing content to the PDF
     y_position -= 40
