@@ -203,6 +203,15 @@ def generate_pdf(instance):
     # Add the school name
     pdf.drawString(x_position, y_position, school_name)
 
+    pdf.setFont("Helvetica-Bold", 20)
+    clearance_name = "Student Pass Clearance"
+    text_width = pdf.stringWidth(clearance_name, "Helvetica-Bold", 25)
+    x_position = (letter[0] - text_width) / 2
+    y_position = 750
+
+    # Add the school name
+    pdf.drawString(x_position, y_position, clearance_name)
+
     # Set font and size for the content
     pdf.setFont("Helvetica", 14)
 
