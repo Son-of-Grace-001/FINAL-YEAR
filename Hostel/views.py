@@ -247,6 +247,9 @@ def generate_pdf(instance):
     qr_img.save(save_path)
   # Save the QR code image
     # pdf.drawInlineImage("image.png", 100, y_position - 80, width=80, height=80)
+    qr_img_data = qr_img.tobytes()  # Get QR code image data
+    pdf.drawInlineImage(qr_img_data, 100, y_position - 80, width=80, height=80)
+
 
 
 
