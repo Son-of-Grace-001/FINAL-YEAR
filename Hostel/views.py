@@ -203,6 +203,8 @@ def generate_pdf(instance):
     # Add the school name
     pdf.drawString(x_position, y_position, school_name)
 
+    y_position -= 40
+
     pdf.setFont("Helvetica-Bold", 20)
     clearance_name = "Student Pass Clearance"
     text_width = pdf.stringWidth(clearance_name, "Helvetica-Bold", 25)
@@ -241,21 +243,20 @@ def generate_pdf(instance):
     pdf.drawString(100, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by an Admin")
 
      # Generate QR code
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=10,
-        border=4,
-    )
-    qr.add_data(f"Name: {instance.user.first_name} {instance.user.last_name}\n Faculty: {instance.faculty}\nDepartment: {instance.department}\nLevel: {instance.level}\nStudent Number: {instance.student_number}\n Parent Number: {instance.parent_number}\n Reason: {instance.reason}\n Departure Date: {instance.departure_date}\n Return Date: {instance.return_date} ")
-    qr.make(fit=True)
-    qr_img = qr.make_image(fill_color="black", back_color="white")
+    # qr = qrcode.QRCode(
+    #     version=1,
+    #     error_correction=qrcode.constants.ERROR_CORRECT_L,
+    #     box_size=10,
+    #     border=4,
+    # )
+    # qr.add_data(f"Name: {instance.user.first_name} {instance.user.last_name}\n Faculty: {instance.faculty}\nDepartment: {instance.department}\nLevel: {instance.level}\nStudent Number: {instance.student_number}\n Parent Number: {instance.parent_number}\n Reason: {instance.reason}\n Departure Date: {instance.departure_date}\n Return Date: {instance.return_date} ")
+    # qr.make(fit=True)
+    # qr_img = qr.make_image(fill_color="black", back_color="white")
 
-    # Draw the QR code on the PDF
-    save_path = "qrfile"
-    qr_img.save(save_path)
+    # # Draw the QR code on the PDF
+    # save_path = "qrfile"
+    # qr_img.save(save_path)
   # Save the QR code image
-    # pdf.drawInlineImage("image.png", 100, y_position - 80, width=80, height=80)
     # qr_img_data = qr_img.tobytes()  # Get QR code image data
     # pdf.drawInlineImage(qr_img_data, 100, y_position - 80, width=80, height=80)
 
@@ -374,6 +375,17 @@ def get_pdf(user):
     # Add the school name
     pdf.drawString(x_position, y_position, school_name)
 
+    y_position -= 40
+
+    pdf.setFont("Helvetica-Bold", 20)
+    clearance_name = "Student Hostel Clearance"
+    text_width = pdf.stringWidth(clearance_name, "Helvetica-Bold", 25)
+    x_position = (letter[0] - text_width) / 2
+    y_position = 750
+
+    # Add the school name
+    pdf.drawString(x_position, y_position, clearance_name)
+
     # Set font and size for the content
     pdf.setFont("Helvetica", 18)
 
@@ -401,21 +413,21 @@ def get_pdf(user):
     # Example data   
 
       # Generate QR code
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=10,
-        border=4,
-    )
-    qr.add_data(f"Name: {user.first_name} {user.last_name}\n Faculty: {user.faculty}\nDepartment: {user.department}\n Gender: {user.gender}\n Block: {user.block}\n Room: {user.room}\n Space: {user.space}\n Hostel: {user.hostel}")
-    qr.make(fit=True)
-    qr_img = qr.make_image(fill_color="black", back_color="white")
+    # qr = qrcode.QRCode(
+    #     version=1,
+    #     error_correction=qrcode.constants.ERROR_CORRECT_L,
+    #     box_size=10,
+    #     border=4,
+    # )
+    # qr.add_data(f"Name: {user.first_name} {user.last_name}\n Faculty: {user.faculty}\nDepartment: {user.department}\n Gender: {user.gender}\n Block: {user.block}\n Room: {user.room}\n Space: {user.space}\n Hostel: {user.hostel}")
+    # qr.make(fit=True)
+    # qr_img = qr.make_image(fill_color="black", back_color="white")
 
     # Draw the QR code on the PDF
     # Draw the QR code on the PDF
-    save_path = "qrfile/qr-code.png"  # Use the correct file path
-    qr_img.save(os.path.join(settings.MEDIA_ROOT, save_path))  # Save the QR code image
-    pdf.drawInlineImage(os.path.join(settings.MEDIA_ROOT, save_path), 100, y_position - 80, width=80, height=80)
+    # save_path = "qrfile/qr-code.png"  # Use the correct file path
+    # qr_img.save(os.path.join(settings.MEDIA_ROOT, save_path))  # Save the QR code image
+    # pdf.drawInlineImage(os.path.join(settings.MEDIA_ROOT, save_path), 100, y_position - 80, width=80, height=80)
 
 
     # Save the PDF to the buffer
