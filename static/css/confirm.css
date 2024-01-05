@@ -32,10 +32,11 @@ input{
   height: 40px;
   width: 120px;
   border-radius: 10px;
-  border: 1px solid #b9b9b9;
+  border: 1px solid #281470;
   text-align: center;
   text-transform: capitalize;
-
+  color:#fff;
+  background-color: #281470;
 }
 .submit{
   height: 40px;
