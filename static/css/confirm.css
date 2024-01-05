@@ -30,7 +30,7 @@ body{
 
 input{
   height: 40px;
-  width: 120px;
+  width: 100%;
   border-radius: 10px;
   border: 1px solid #281470;
   text-align: center;
