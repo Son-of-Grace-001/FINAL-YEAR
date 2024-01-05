@@ -159,9 +159,8 @@ class Upload(models.Model):
 
 
 class Amount(models.Model):
-    name = models.CharField(max_length=10)
-    price = models.IntegerField()
+    price = models.CharField(max_length=10)
     created = models.DateTimeField(auto_now_add = True)
     
     def __str__(self):
-        return self.name
+        return self.price
