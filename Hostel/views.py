@@ -85,7 +85,6 @@ def complaint(request):
             lname =lname
         )
         complaint.save()
-
         context = {
             'fname': user.first_name,
             'lname': user.last_name,
@@ -94,6 +93,7 @@ def complaint(request):
             'hostel': user.hostel
 
         }
+
 
         if request.user.is_authenticated:
             user_first_name = request.user.first_name
@@ -125,7 +125,13 @@ def complaint(request):
 @login_required
 def book_pass(request):
     user = request.user
-    context = {}
+    context = {
+        'fac': user.faculty,
+        'dep': user.department,
+        'level': user.level,
+        'student_num': user.phone_number
+    }
+    
     if request.method == 'POST':
         departure_date = request.POST.get('departure_date')
         return_date = request.POST.get('return_date')
@@ -150,12 +156,6 @@ def book_pass(request):
         )
         exeat.save()
 
-        context = {
-            'fac': user.faculty,
-            'dep': user.department,
-            'level': user.level,
-            'student_num': user.phone_number
-        }
 
         if request.user.is_authenticated:
             user_first_name = request.user.first_name
@@ -255,7 +255,7 @@ def book_room(request):
     if user.hostel or user.block or user.room:
         return redirect('home')
     print(user.gender)
-    if user.gender == "1":
+    if user.gender == 1:
         gender = 'male'
     else:
         gender = 'female'
