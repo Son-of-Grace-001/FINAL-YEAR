@@ -203,11 +203,13 @@ def generate_pdf(instance):
     # Add the school name
     pdf.drawString(x_position, y_position, school_name)
 
+    y_position -= 50
+
     pdf.setFont("Helvetica-Bold", 20)
     clearance_name = "Student Pass Clearance"
     text_width = pdf.stringWidth(clearance_name, "Helvetica-Bold", 25)
     x_position = (letter[0] - text_width) / 2
-    y_position = -50
+    y_position = 700
 
     # Add the school name
     pdf.drawString(x_position, y_position, clearance_name)
@@ -239,6 +241,7 @@ def generate_pdf(instance):
     pdf.drawString(100, y_position, f'Return Date: {instance.return_date}')
     y_position -= 40
     pdf.drawString(100, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by an Admin")
+
 
     # Save the PDF to the buffer
     pdf.showPage()
@@ -352,11 +355,13 @@ def get_pdf(user):
     # Add the school name
     pdf.drawString(x_position, y_position, school_name)
 
+    y_position -= 40
+
     pdf.setFont("Helvetica-Bold", 20)
     clearance_name = "Student Hostel Clearance"
     text_width = pdf.stringWidth(clearance_name, "Helvetica-Bold", 25)
     x_position = (letter[0] - text_width) / 2
-    y_position = -50
+    y_position = 750
 
     # Add the school name
     pdf.drawString(x_position, y_position, clearance_name)
