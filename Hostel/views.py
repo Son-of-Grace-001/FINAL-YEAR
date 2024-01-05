@@ -398,9 +398,11 @@ def get_pdf(user):
     qr_img = qr.make_image(fill_color="black", back_color="white")
 
     # Draw the QR code on the PDF
-    save_path = "qrfile/qr_code.png"
-    qr_img.save(save_path)  # Save the QR code image (replace with your path)
-    pdf.drawInlineImage(save_path, 100, y_position - 80, width=80, height=80)
+    # Draw the QR code on the PDF
+    save_path = "qrfile/qr-code.png"  # Use the correct file path
+    qr_img.save(os.path.join(settings.MEDIA_ROOT, save_path))  # Save the QR code image
+    pdf.drawInlineImage(os.path.join(settings.MEDIA_ROOT, save_path), 100, y_position - 80, width=80, height=80)
+
 
     # Save the PDF to the buffer
     pdf.showPage()
