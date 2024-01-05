@@ -16,6 +16,8 @@ from django.http import HttpResponse, Http404
 import requests
 from io import BytesIO
 from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
 
 def home (request):
   return render (request, 'hostel/home.html')
@@ -188,10 +190,24 @@ def generate_pdf(instance):
     buffer = BytesIO()
 
     # Create the PDF object, using the BytesIO buffer as its "file."
-    pdf = canvas.Canvas(buffer)
+    pdf = canvas.Canvas(buffer, pagesize=letter)
+
+    pdf.setFont("Helvetica-Bold", 16)
+    school_name = "Adeleke University Ede, Osun State"
+    text_width = pdf.stringWidth(school_name, "Helvetica-Bold", 16)
+    x_position = (letter[0] - text_width) / 2
+    y_position = 750
+
+    # Add the school name
+    pdf.drawString(x_position, y_position, school_name)
+
+    # Set font and size for the content
+    pdf.setFont("Helvetica", 12)
+
+    # Add existing content to the PDF
+    y_position -= 40
 
     # Add content to the PDF
-    y_position = 800
 
     pdf.drawString(100, y_position, f'Hello, {instance.user.first_name} {instance.user.last_name}')
     y_position -= 40  # Adjust the y-coordinate for the next line
