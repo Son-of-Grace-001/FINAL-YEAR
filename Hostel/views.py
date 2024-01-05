@@ -215,32 +215,32 @@ def generate_pdf(instance):
     pdf.drawString(x_position, y_position, clearance_name)
 
     # Set font and size for the content
-    pdf.setFont("Helvetica", 14)
+    pdf.setFont("Helvetica", 11)
 
     # Add existing content to the PDF
-    y_position -= 40
+    y_position -= 50
 
     # Add content to the PDF
 
-    pdf.drawString(100, y_position, f'Hello, {instance.user.first_name} {instance.user.last_name}')
-    y_position -= 20  # Adjust the y-coordinate for the next line
-    pdf.drawString(100, y_position, f'Faculty: {instance.faculty}')
-    y_position -= 20
-    pdf.drawString(100, y_position, f'Department: {instance.department}')
-    y_position -= 20
-    pdf.drawString(100, y_position, f'Level: {instance.level}')
-    y_position -= 20
-    pdf.drawString(100, y_position, f'Student Number: {instance.student_number}')
-    y_position -= 20
-    pdf.drawString(100, y_position, f'Parent Number: {instance.parent_number}')
-    y_position -= 20
-    pdf.drawString(100, y_position, f'Reason: {instance.reason}')
-    y_position -= 20
-    pdf.drawString(100, y_position, f'Departure Date: {instance.departure_date}')
-    y_position -= 20
-    pdf.drawString(100, y_position, f'Return Date: {instance.return_date}')
-    y_position -= 20
-    pdf.drawString(100, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by an Admin")
+    pdf.drawString(50, y_position, f'Hello, {instance.user.first_name} {instance.user.last_name}')
+    y_position -= 40  # Adjust the y-coordinate for the next line
+    pdf.drawString(50, y_position, f'Faculty: {instance.faculty}')
+    y_position -= 40
+    pdf.drawString(50, y_position, f'Department: {instance.department}')
+    y_position -= 40
+    pdf.drawString(50, y_position, f'Level: {instance.level}')
+    y_position -= 40
+    pdf.drawString(50, y_position, f'Student Number: {instance.student_number}')
+    y_position -= 40
+    pdf.drawString(50, y_position, f'Parent Number: {instance.parent_number}')
+    y_position -= 40
+    pdf.drawString(50, y_position, f'Reason: {instance.reason}')
+    y_position -= 40
+    pdf.drawString(50, y_position, f'Departure Date: {instance.departure_date}')
+    y_position -= 40
+    pdf.drawString(50, y_position, f'Return Date: {instance.return_date}')
+    y_position -= 40
+    pdf.drawString(50, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by an Admin")
 
 
     # Save the PDF to the buffer
@@ -355,13 +355,13 @@ def get_pdf(user):
     # Add the school name
     pdf.drawString(x_position, y_position, school_name)
 
-    y_position -= 50
+    y_position -= 40
 
     pdf.setFont("Helvetica-Bold", 20)
     clearance_name = "Student Hostel Clearance"
-    text_width = pdf.stringWidth(clearance_name, "Helvetica-Bold", 20)
+    text_width = pdf.stringWidth(clearance_name, "Helvetica-Bold", 25)
     x_position = (letter[0] - text_width) / 2
-    y_position = 700
+    y_position = 750
 
     # Add the school name
     pdf.drawString(x_position, y_position, clearance_name)
@@ -374,21 +374,21 @@ def get_pdf(user):
 
     # Add content to the PDF
     y_position = 800
-    pdf.drawString(100, 800, f'Hello, {user.first_name} {user.last_name}')
-    y_position -= 20
-    pdf.drawString(100, 760, f'Hostel: {user.hostel}')
-    y_position -= 20
-    pdf.drawString(100, 720, f'Faculty: {user.faculty}')
-    y_position -= 20
-    pdf.drawString(100, 680, f'Department: {user.department}')
-    y_position -= 20
-    pdf.drawString(100, 640, f'Gender: {user.gender}')
-    y_position -= 20
-    pdf.drawString(100, 600, f'Block: {user.block}')
-    y_position -= 20
-    pdf.drawString(100, 560, f'Room: {user.room}')
-    y_position -= 20
-    pdf.drawString(100, 520, f'Bed Space: {user.space}')
+    pdf.drawString(50, 800, f'Hello, {user.first_name} {user.last_name}')
+    y_position -= 40
+    pdf.drawString(50, 760, f'Hostel: {user.hostel}')
+    y_position -= 40
+    pdf.drawString(50, 720, f'Faculty: {user.faculty}')
+    y_position -= 40
+    pdf.drawString(50, 680, f'Department: {user.department}')
+    y_position -= 40
+    pdf.drawString(50, 640, f'Gender: {user.gender}')
+    y_position -= 40
+    pdf.drawString(50, 600, f'Block: {user.block}')
+    y_position -= 40
+    pdf.drawString(50, 560, f'Room: {user.room}')
+    y_position -= 40
+    pdf.drawString(50, 520, f'Bed Space: {user.space}')
 
     # Save the PDF to the buffer
     pdf.showPage()
