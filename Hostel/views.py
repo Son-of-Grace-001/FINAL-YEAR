@@ -240,7 +240,7 @@ def generate_pdf(instance):
     y_position -= 40
     pdf.drawString(50, y_position, f'Return Date: {instance.return_date}')
     y_position -= 40
-    pdf.drawString(50, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by an Admin")
+    pdf.drawString(30, y_position, f"Your exact request from {instance.departure_date} to {instance.return_date} has been {instance.status.title()} by an Admin")
 
     obj_qr = qrcode.QRCode(
         version = 1,
@@ -258,6 +258,8 @@ def generate_pdf(instance):
     qr_img = obj_qr.make_image(fill_color = "black", back_color = "white")
 
     qr_img.save("qr-img.png")
+
+    pdf.drawInlineImage("qr-img.png", x_position, y_position - 80, width=80, height=80)
 
 
     # Save the PDF to the buffer
