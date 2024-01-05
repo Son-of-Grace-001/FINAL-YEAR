@@ -304,7 +304,7 @@ def book_room(request):
     if user.hostel or user.block or user.room:
         return redirect('home')
     print(user.gender)
-    if user.gender == 1:
+    if user.gender.pk == 1:
         gender = 'male'
     else:
         gender = 'female'
@@ -402,6 +402,8 @@ def get_pdf(user):
     y_position -= 40
     pdf.drawString(50, 680, f'Department: {user.department}')
     y_position -= 40
+    pdf.drawString(50, 680, f'Level: {user.level}')
+    y_position -= 40
     pdf.drawString(50, 640, f'Gender: {user.gender}')
     y_position -= 40
     pdf.drawString(50, 600, f'Block: {user.block}')
@@ -410,12 +412,33 @@ def get_pdf(user):
     y_position -= 40
     pdf.drawString(50, 520, f'Bed Space: {user.space}')
 
+    y_position -=100
+
+    obj_qr = qrcode.QRCode(
+        version = 1,
+        error_correction = qrcode.constants.ERROR_CORRECT_L,
+        box_size = 10,
+        border = 4,
+    )
+
+    obj_qr.add_data(
+        f"Name: {user.first_name} {user.last_name}\nFaculty: {user.faculty}\nDepartment: {user.department}\nLevel: {user.level}\n Gender: {user.gender}\n Hostel: {user.hostel}\n Block: {user.block}\n Room: {user.room}\n Bed Space: {user.space}"
+    
+    )
+    obj_qr.make(fit = True)
+
+    qr_img = obj_qr.make_image(fill_color = "black", back_color = "white")
+
+    qr_img.save("qr-img.png")
+
+    pdf.drawInlineImage("qr-img.png", x_position, y_position - 80, width=100, height=100)
+
     # Save the PDF to the buffer
     pdf.showPage()
     pdf.save()
 
     # Construct a filename for the PDF
-    filename = f"{user.username}_room_allocation.pdf"
+    filename = f"{user.first_name}_room_allocation.pdf"
 
     # File pointer to the beginning of the buffer
     buffer.seek(0)
