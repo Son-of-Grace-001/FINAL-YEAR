@@ -129,7 +129,7 @@ def book_pass(request):
         'dep': user.department,
         'level': user.level,
     }
-
+    
     if request.method == 'POST':
         departure_date = request.POST.get('departure_date')
         return_date = request.POST.get('return_date')
@@ -200,7 +200,7 @@ def generate_pdf(instance):
     y_position -= 40
     pdf.drawString(100, y_position, f'Level: {instance.level}')
     y_position -= 40
-    pdf.drawString(100, y_position, f'Student Number: {instance.parent_number}')
+    pdf.drawString(100, y_position, f'Student Number: {instance.student_number}')
     y_position -= 40
     pdf.drawString(100, y_position, f'Parent Number: {instance.parent_number}')
     y_position -= 40
