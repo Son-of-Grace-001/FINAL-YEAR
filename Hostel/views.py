@@ -128,7 +128,6 @@ def book_pass(request):
         'fac': user.faculty,
         'dep': user.department,
         'level': user.level,
-        'student_num': user.phone_number
     }
 
     if request.method == 'POST':
