@@ -104,21 +104,30 @@
       <p class="pp">
         Please supply all the required informations correctly 
       </p>
-
+      
       <form method="POST">
+        
+        {% csrf_token %}
+  
+        {% for message in messages %}
+  
+        <p class="success">{{message}}</p>
+
+        {% endfor %}
+
         <div class="fname-grid">
           <div>
             <label class="namef" for="fname">First Name</label> <br>
-            <input class="fname" type="text" name="fname" placeholder="Enter your first name">
+            <input class="fname" type="text" name="fname" placeholder="Enter your first name" required>
           </div>
           <div>
             <label class="namel" for="lname">Last Name</label><br>
-            <input class="lname" type="text" name="lname" placeholder="Enter your last name">
+            <input class="lname" type="text" name="lname" placeholder="Enter your last name" required>
           </div>
         </div>
         <label class="lemail" for="email">Email</label> <br>
-        <input name="email" class="email" type="text" placeholder="Enter your email"> <br>
-        <textarea name="message" id="message" cols="30" rows="15">Enter your message</textarea> <br>
+        <input name="email" class="email" type="text" placeholder="Enter your email" required> <br>
+        <textarea name="message" id="message" cols="30" rows="15" required>Enter your message</textarea> <br>
         <input class="submit" type="submit">
       </form>
     </div>
