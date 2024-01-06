@@ -170,7 +170,7 @@ input{
 #message{
   width: 100%;
   border: 1px solid #b9b9b9;
-  color: #b9b9b9;
+  color: rgb(76, 71, 71);
   padding-left: 10px;
 }
 
