@@ -39,7 +39,7 @@ def home (request):
     
     mail = EmailMessage(subject= subject, body=body, from_email=settings.EMAIL_HOST_USER , to = [settings.EMAIL_HOST_USER])
     mail.send()
-    messages.info(request, "Your message was sent successfully")
+    messages.success(request, "Your message was sent successfully")
       
   return render (request, 'hostel/home.html')
 
