@@ -35,7 +35,7 @@ def home (request):
     mail.send()
     
     subject = "New message Alert"
-    body = f"A new message was received from {fname} {lname}, with the message of '{message}', and a mail has been automatically sent to their eamil, which is {email} Please attend to it"
+    body = f"A new message was received from {fname} {lname}, with the message of '{message}', and a mail has been automatically sent to their email, which is {email} Please attend to it"
     
     mail = EmailMessage(subject= subject, body=body, from_email=settings.EMAIL_HOST_USER , to = [settings.EMAIL_HOST_USER])
     mail.send()

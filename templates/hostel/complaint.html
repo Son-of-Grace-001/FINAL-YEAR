@@ -20,23 +20,23 @@
         </div>
 
         {% csrf_token %}
-        <label for="title">:</label>
+        <label for="title">Title:</label>
         <input type="text" name="title" required placeholder="Enter the complaint's title">
         
         <label for="text">Hostel</label>
-        <input type="text" name="hostel_name" required value="{{hostel}}" disabled>
+        <input type="text" name="hostel_name" required value="{{hostel}}" readonly>
         
         <label for="block_number">First Name:</label>
-        <input type="text" name="first_name" required  value="{{fname}}" disabled>
+        <input type="text" name="first_name" required  value="{{fname}}" readonly>
         
         <label for="block_number">Last Name:</label>
-        <input type="text" name="last_name" required value="{{lname}}" disabled>
+        <input type="text" name="last_name" required value="{{lname}}" readonly>
         
         <label for="block_number">Block Number:</label>
-        <input type="text" name="block_number" required value="{{block_num}}" disabled>
+        <input type="text" name="block_number" required value="{{block_num}}" readonly>
 
         <label for="room_number">Room Number:</label>
-        <input type="text" name="room_number" required value="{{room_num}}" disabled>
+        <input type="text" name="room_number" required value="{{room_num}}" readonly>
 
         <label for="message">Complaint:</label>
         <textarea name="message" rows="6" required placeholder="Enter your complaints in details"></textarea>
