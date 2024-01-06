@@ -22,14 +22,14 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 
 def home (request):
-  if request == 'POST':
+  if request.method == 'POST':
     fname = request.POST.get('fname')
     lname = request.POST.get('lname')
     email = request.POST.get('email')
     message = request.POST.get('message')
 
     subject = "Thanks for contacting me"
-    body = f"Hello {fname} {lname},\n\nThank you for reaching out to me, your message has been received successfully, we will get back to you in due time\n\nWarm Regards,\n\nOlajire Stephen\n"
+    body = f"Hello {fname} {lname},\n\nThank you for reaching out to us, your message has been received successfully, we will get back to you in due time\n\nWarm Regards,\n\nAdeleke Hostel Administrator\n"
 
     mail = EmailMessage(subject= subject, body=body, from_email=settings.EMAIL_HOST_USER , to = [email])
     mail.send()
