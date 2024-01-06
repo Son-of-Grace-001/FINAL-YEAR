@@ -103,7 +103,7 @@ class BedSpace(models.Model):
         return f"{self.bunk} - {self.position}"
 
 class Complaint (models.Model):
-    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     fname = models.CharField(max_length=100)
     lname = models.CharField(max_length=100)
     title = models.CharField(max_length = 100)
