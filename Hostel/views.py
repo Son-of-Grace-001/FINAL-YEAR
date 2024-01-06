@@ -101,8 +101,8 @@ def complaint(request):
         message = request.POST['message']
         image = request.FILES['image']
         hostel_name = request.POST['hostel_name']
-        fname = request.FILES['fname']
-        lname = request.POST['lname']
+        fname = request.POST['first_name']
+        lname = request.POST['last_name']
 
         complaint = Complaint.objects.create(
             user = request.user,
