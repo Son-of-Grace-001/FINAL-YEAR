@@ -105,6 +105,7 @@ def complaint(request):
         lname = request.POST['lname']
 
         complaint = Complaint.objects.create(
+            user = request.user,
             title=title,
             block_number=block_number,
             room_number=room_number,
