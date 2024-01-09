@@ -47,7 +47,7 @@ class CustomUser(AbstractUser):
     bunk = models.ForeignKey('Bunk', on_delete=models.SET_NULL, null=True)
     space = models.ForeignKey('BedSpace', on_delete=models.SET_NULL, null=True)
     level = models.ForeignKey('Level', on_delete=models.SET_NULL, null=True)
-    # phone_number = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
