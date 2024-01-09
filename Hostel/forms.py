@@ -13,7 +13,7 @@ class CustomSignupForm(SignupForm):
     matric_number = forms.CharField(max_length=15, required=True)
     gender = forms.ModelChoiceField (queryset=Gender.objects.all(), empty_label="Select Gender", required=True)
     faculty = forms.ModelChoiceField(queryset=Faculty.objects.all(), empty_label="Select Faculty", required=True)
-    department = forms.ModelChoiceField(queryset=Department.objects.all(), required=True)
+    department = forms.ModelChoiceField(queryset=Department.objects.all(), empty_label= "Select Gender", required=True)
     level = forms.ModelChoiceField(queryset=Level.objects.all(), empty_label="Select Level", required=True)
     phone_number = forms.CharField(max_length=20, required=True)
     profile_image = forms.ImageField(validators=[
