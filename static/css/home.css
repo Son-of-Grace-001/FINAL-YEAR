@@ -128,7 +128,7 @@ a{
 
 .p{
   /* text-align: justify; */
-  font-size: 16px;
+  font-size: 18px;
   color: rgb(76, 71, 71);
   margin-top:10px;
 }
@@ -337,6 +337,10 @@ input{
 
   .logout-bttn{
     display: none;
+  }
+
+  .p{
+    font-size: 16px;
   }
 
   #menu{
