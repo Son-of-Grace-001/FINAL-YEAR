@@ -125,8 +125,8 @@ a{
 }
 
 .p{
-  text-align: justify;
-  /* font-size: 18px; */
+  /* text-align: justify; */
+  font-size: 14px;
   color: rgb(76, 71, 71);
   margin-top:10px;
 }
