@@ -26,6 +26,7 @@
   text-align:center;
   margin-top:10px;
   margin-bottom: 10px;
+  position: absolute;
 }
 
 .nav-options{
@@ -112,6 +113,7 @@ a{
   grid-template-columns: 1fr 1fr 1fr 1fr;
   margin-top: 40px;
   gap: 20px;
+  margin-bottom: 100px;
   
 }
 .img-r{
@@ -126,7 +128,7 @@ a{
 
 .p{
   /* text-align: justify; */
-  font-size: 14px;
+  font-size: 16px;
   color: rgb(76, 71, 71);
   margin-top:10px;
 }
@@ -137,7 +139,9 @@ a{
   gap: 8px;
   /* margin-bottom:100px; */
 }
-
+#inner{
+  margin-bottom: 100px;
+}
 .pp {
   color: rgb(76, 71, 71);
   font-size: 18px;
@@ -292,7 +296,7 @@ input{
     display: grid;
     grid-template-columns: 1fr;
     margin-bottom: 0px;
-    row-gap: 0px;
+    gap:20px;
   }
 
   .about, .rules, .contact-div{

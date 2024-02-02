@@ -117,12 +117,6 @@
       <form method="POST">
         
         {% csrf_token %}
-  
-        {% for message in messages %}
-  
-        <p class="success">{{message}}</p>
-
-        {% endfor %}
 
         <div class="fname-grid">
           <div>
