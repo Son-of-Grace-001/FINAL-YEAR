@@ -15,3 +15,12 @@ function close(){
   clear.style.display = "none"
   menu.style.display = "block"
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    var successDivs = document.querySelectorAll('.success-div');
+    successDivs.forEach(function(div) {
+      div.style.display = 'none';
+    });
+  }, 60000);  // 60000 milliseconds = 1 minute
+});
