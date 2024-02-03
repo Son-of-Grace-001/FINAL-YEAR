@@ -494,39 +494,39 @@ def hostel_fees(request):
     }
     return render(request, 'hostel/hostel_fees.html', context)
 
-# class CustomLoginView(LoginView):
-#     def form_valid(self, form):
-#         # Call the parent form_valid method
-#         response = super().form_valid(form)
+class CustomLoginView(LoginView):
+    def form_valid(self, form):
+        # Call the parent form_valid method
+        response = super().form_valid(form)
 
-#         # Check if the user is authenticated
-#         if self.request.user.is_authenticated:
-#             # Call the send_otp function
-#             send_otp(self.request)
-#             username = form.cleaned_data['username']
-#             self.request.session['username'] = username
+        # Check if the user is authenticated
+        if self.request.user.is_authenticated:
+            # Call the send_otp function
+            send_otp(self.request)
+            username = form.cleaned_data['username']
+            self.request.session['username'] = username
 
 
-# def otp(request):
-#     if request.method == 'POST':
-#         otp = request.POST ['otp']
-#         username = request.session['username']
+def otp(request):
+    if request.method == 'POST':
+        otp = request.POST ['otp']
+        username = request.session['username']
 
-#         otp_secret_key = request.session ['otp_secret_key']
-#         otp_valid_until = request.session ['otp_valid_until']
+        otp_secret_key = request.session ['otp_secret_key']
+        otp_valid_until = request.session ['otp_valid_until']
 
-#         if otp_secret_key and otp_valid_until is not None:
-#             valid_until = datetime.fromisoformat(otp_valid_until)
+        if otp_secret_key and otp_valid_until is not None:
+            valid_until = datetime.fromisoformat(otp_valid_until)
 
-#             if valid_until > datetime.now():
-#                 totp = pyotp.TOTP(otp_secret_key, interval=300)
-#                 if totp.verify(otp):
-#                     user = get_object_or_404(CustomUser, username=username)
-#                     login(request, user)
+            if valid_until > datetime.now():
+                totp = pyotp.TOTP(otp_secret_key, interval=300)
+                if totp.verify(otp):
+                    user = get_object_or_404(CustomUser, username=username)
+                    login(request, user)
 
-#                     del request.session['otp_secret_key']
-#                     del request.session['otp_valid_until']
+                    del request.session['otp_secret_key']
+                    del request.session['otp_valid_until']
 
-#                     return redirect ('dashboard')
+                    return redirect ('dashboard')
                 
-#     return render(request, 'hostel/otp.html')
+    return render(request, 'hostel/otp.html')
