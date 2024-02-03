@@ -1,0 +1,31 @@
+{% load static %}
+<!-- templates/book_exeat.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bookpass.css' %}">
+    <title>Book Exeat</title>
+</head>
+<body>
+
+<form method="post" action="{% url 'pass' %}">
+    {% csrf_token %}
+
+    <div class="img-div">
+        <img class="logo" src="{% static 'img/logo one.jpeg' %}" alt="logo">
+      </div>
+
+      <h1 class="login-h">OTP</h1>
+      <p class="details">Pls fill in the otp correctly</p>
+    </div>
+
+    <label for="departure_date">Faculty:</label>
+    <input class="date" type="number" name="otp">
+    
+    <button class="submit" type="submit">Submit</button>
+</form>
+
+</body>
+</html>

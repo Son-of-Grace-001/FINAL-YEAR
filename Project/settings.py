@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
+    # 'qrcode',
+    # 'pyotp',
     'Hostel',
 ]
 
@@ -187,7 +189,7 @@ ACCOUNT_EMAIL_REQUIRED = 'True'
 
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = 'True'
 
-LOGIN_REDIRECT_URL = "dashboard"
+LOGIN_REDIRECT_URL = "otp"
 
 LOGOUT_REDIRECT_URL = 'home'
 
@@ -210,9 +212,9 @@ JAZZMIN_SETTINGS = {
     'site_header': 'Adeleke University Hostel Website',
     'welcome_sign': 'Welcome to My Adeleke Hostel Website',
     "site_logo": "img/logo one.jpeg",
-     "login_logo": "img/logo one.jpeg",
-     "site_logo_classes": "img-circle",
-     "copyright": "olajire 2024",
+    "login_logo": "img/logo one.jpeg",
+    "site_logo_classes": "img-circle",
+    "copyright": "olajire 2024",
     'show_sidebar': True,
     'related_modal_active': True,
     'changeform_format': 'stacked',
