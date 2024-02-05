@@ -63,7 +63,7 @@ h3{
 .headings{
   color: rgb(76, 71, 71);
   font-size: 18px;
-  text-align: justify;
+  /* text-align: justify; */
   margin-top: 15px;
 }
 
