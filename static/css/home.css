@@ -88,6 +88,7 @@ a{
   padding-left:100px;
   padding-right:100px;
 }
+
 .about-h, .rules-h, .contact-h{
   font-size: 30px;
   text-align: center;
@@ -358,5 +359,9 @@ input{
 
   .hamburger{
     display: block;
+  }
+
+  .about-t{
+    font-size: 16px;
   }
 }
