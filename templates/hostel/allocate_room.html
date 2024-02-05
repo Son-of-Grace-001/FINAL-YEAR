@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Allocate Room</title>
+    <title>Book Room</title>
     <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
@@ -16,6 +16,7 @@
               <img class="logo" src="{% static 'img/logo one.jpeg' %}" alt="logo">
             </div>
             <h1 class="login-h">BOOK ROOM</h1>
+            <p class="room-option">Pls pick from one of the two options</p>
         </div>
         {% for hostel, bed_spaces in available_spaces %}
             <h3 class="male">{{ hostel }}</h3>

@@ -134,6 +134,13 @@ select{
   border: 1px solid #281470;
 }
 
+.room-option{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #b9b9b9;
+}
+
 @media only screen and (max-width:600px){
   body{
     padding: 20px;
