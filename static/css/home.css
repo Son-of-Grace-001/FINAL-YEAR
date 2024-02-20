@@ -258,13 +258,12 @@ input{
 .type-text{
   height:100px;
   width:100%;
-  margin-bottom:100px;
   margin-top:100px;
   align-items: center;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
+  /* position: fixed; */
+  /* z-index: 1; */
+  /* top: 0; */
+  /* left: 0; */
 }
 
 .typewriter {
@@ -272,7 +271,6 @@ input{
   text-align:center;
   padding-top: 30px;
   font-size: 40px;
-  overflow: hidden;
   white-space: nowrap;
   letter-spacing: .15em;
   animation: typing 20s steps(50, end), blink-caret 1.25s step-end infinite;
