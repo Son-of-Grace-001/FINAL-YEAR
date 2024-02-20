@@ -268,7 +268,6 @@ input{
   font-size: 40px;
   overflow: hidden;
   white-space: nowrap;
-  margin: 0 auto;
   letter-spacing: .15em;
   animation: typing 30s steps(50, end), blink-caret .75s step-end infinite;
 }
@@ -393,5 +392,16 @@ input{
 
   .about-t{
     font-size: 16px;
+  }
+
+  .typewriter {
+    color: #281470;
+    text-align:center;
+    align-items:center;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    letter-spacing: .15em;
+    animation: typing 30s steps(50, end), blink-caret .75s step-end infinite;
   }
 }
