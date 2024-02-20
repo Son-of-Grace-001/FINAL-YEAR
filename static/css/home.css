@@ -21,7 +21,7 @@
   left:0;
   backdrop-filter: blur(10px);
   box-shadow: 0 0 20px #b9b9b9;
-  border: 2px solid #b9b9b9;
+  border-bottom: 2px solid #281470;
 }
 
 .success{
@@ -290,6 +290,9 @@ input{
     font-size:20px;
   }
 
+  .uni{
+    display:none;
+  }
   .option5, .option6{
     display: block;
   }
