@@ -83,7 +83,7 @@ a{
   background-image: url(../img/login.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  margin-top:100px;
+  margin-top:300px;
 }
 
 /* styling the about div */
@@ -259,6 +259,7 @@ input{
   height:100px;
   width:100%;
   margin-top:100px;
+  background-color: white;
   display:flex;
   align-items:center;
   justify-content:center;
