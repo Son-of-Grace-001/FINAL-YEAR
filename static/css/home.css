@@ -255,14 +255,15 @@ input{
   display: none;
 }
 
-.type-text{
+/* .type-text{
   height:100px;
   width:100%;
   margin-top:100px;
-}
+} */
 
 .typewriter {
   color: #281470;
+  margin-top: 100px;
   text-align:center;
   align-items:center;
   font-size: 40px;
