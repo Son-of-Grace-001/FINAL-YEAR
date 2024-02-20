@@ -255,9 +255,17 @@ input{
   display: none;
 }
 
+.text-type{
+  height:100px;
+  width:100%;
+  text-align:center;
+  align-items:center;
+}
+
 .typewriter {
+  color: #281470;
+  font-size: 40px;
   overflow: hidden;
-  border-right: .15em solid orange;
   white-space: nowrap;
   margin: 0 auto;
   letter-spacing: .15em;
