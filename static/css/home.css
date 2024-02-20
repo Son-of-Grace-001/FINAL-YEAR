@@ -19,8 +19,9 @@
   z-index: 1;
   top:0;
   left:0;
-  box-shadow: 10px 10px rgba(0, 0, 255, 0.108);
-  border: 1px solid rgba(128, 128, 128, 0.171);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px #b9b9b9;
+  border: 1px solid #fff;
 }
 
 .success{
