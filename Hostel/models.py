@@ -171,4 +171,4 @@ class Payment(models.Model):
     created = models.DateTimeField(auto_now_add = True)
 
     def __str__(self):
-        return self.proof
+        return self.matric_number
