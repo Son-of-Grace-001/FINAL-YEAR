@@ -83,7 +83,7 @@ a{
   background-image: url(../img/login.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  margin-top:100px;
+  margin-top:200px;
 }
 
 /* styling the about div */
@@ -403,10 +403,20 @@ input{
     color: #281470;
     text-align:center;
     align-items:center;
-    font-size: 16px;
+    font-size: 20px;
     overflow: hidden;
     white-space: nowrap;
     letter-spacing: .15em;
     animation: typing 30s steps(50, end), blink-caret .75s step-end infinite;
+  }
+
+    @keyframes typing {
+      from {
+        width: 0
+      }
+      to {
+        width: 100%
+      }
+    }
   }
 }
