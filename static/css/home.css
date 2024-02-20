@@ -253,10 +253,6 @@ input{
 }
 
 .typewriter {
-  color:  #281470;
-  margin-top:20px;
-  margin-bottom: 20px;
-  font-size: 40px;
   overflow: hidden;
   border-right: .15em solid orange;
   white-space: nowrap;
