@@ -277,7 +277,7 @@ input{
 @media only screen and (max-width:600px){
   .nav-options{
     display: block;
-    margin-top: 100px;
+    margin-top: 200px;
     position: absolute;
     background-color: #ffffffd8;
     padding: 40px;
