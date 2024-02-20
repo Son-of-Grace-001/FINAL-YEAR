@@ -260,12 +260,12 @@ input{
   width:100%;
   margin-top:100px;
   align-items: center;
-  padding-top: 30px;
 }
 
 .typewriter {
   color: #281470;
   text-align:center;
+  padding-top: 30px;
   font-size: 40px;
   overflow: hidden;
   white-space: nowrap;
