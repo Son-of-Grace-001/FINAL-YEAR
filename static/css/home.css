@@ -263,14 +263,15 @@ input{
 
 .typewriter {
   color: #281470;
-  margin-top: 100px;
+  margin-top: 130px;
+  margin-bottom: 30px;
   text-align:center;
   align-items:center;
   font-size: 40px;
   overflow: hidden;
   white-space: nowrap;
   letter-spacing: .15em;
-  animation: typing 30s steps(50, end), blink-caret .75s step-end infinite;
+  animation: typing 20s steps(50, end), blink-caret 1.25s step-end infinite;
 }
 
 @keyframes typing {
