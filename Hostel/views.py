@@ -317,9 +317,14 @@ def send_mail(instance):
 
 @login_required
 def upload_school_fee_evidence(request):
+    user = request.user
     # if user already have an hostel allocated to them, they should be redirected to home page
     if request.user.hostel or request.user.block or request.user.room:
         return redirect('dashboard')
+    context = {
+        'matric_number': user.matric_number
+    }
+    
     if request.method == 'POST':
         matric_number = request.POST.get('matric_number')
         
@@ -331,7 +336,7 @@ def upload_school_fee_evidence(request):
             # No payment entry found for the specified matric number
             messages.error(request, f'No payment found for matric number {matric_number}')
             return render (request, 'hostel/book_room.html')
-    return render (request, 'hostel/book_room.html')
+    return render (request, 'hostel/book_room.html', context)
 
 @login_required
 def book_room(request):
