@@ -19,6 +19,8 @@
   z-index: 1;
   top:0;
   left:0;
+  box-shadow: 10px 10px rgba(0, 0, 255, 0.108);
+  border: 1px solid rgba(128, 128, 128, 0.171);
 }
 
 .success{
