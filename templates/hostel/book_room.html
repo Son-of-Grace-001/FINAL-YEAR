@@ -12,8 +12,9 @@
 <body>
   <form method="post" enctype="multipart/form-data" action="{%  url 'payment' %}">
     {% for message in messages %}
-    <p>{{message.error}}</p>
-    {endfor}
+    <p class="pppp">{{message.error}}</p>
+    {% endfor %}
+
     {% csrf_token %}
     <h1 class="confirm">Payment validation</h1>
     <p class="pp">
