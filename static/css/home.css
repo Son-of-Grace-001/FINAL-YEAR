@@ -252,6 +252,28 @@ input{
   display: none;
 }
 
+.typewriter {
+  color:  #281470;
+  margin-top:20px;
+  margin-bottom: 20px;
+  font-size: 40px;
+  overflow: hidden;
+  border-right: .15em solid orange;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: .15em;
+  animation: typing 1s steps(10, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+  to {
+    width: 100%
+  }
+}
+
 @media only screen and (max-width:600px){
   .nav-options{
     display: block;
