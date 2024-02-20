@@ -16,13 +16,13 @@
     {% endfor %}
 
     {% csrf_token %}
-    <h1 class="confirm">Payment validation</h1>
+    <h1 class="confirm">School-Fee validation</h1>
     <p class="pp">
       Your matric number is required to proceed to the next step to booking room
     </p>
 
-    <label for="evidence">Upload Payment</label> <br>
-    <input type="text" name="matric_number" id="evidence" required>
+    <label for="evidence">Matric Number</label> <br>
+    <input type="text" name="matric_number" id="evidence" required placeholder="Enter your matric number">
     
     <div class="submit">
       <button class="btn-evidence">Submit</button>
