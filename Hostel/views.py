@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from allauth.account.views import SignupView
 from .forms import CustomSignupForm, EditProfileForm
-from .models import Department, CustomUser, Exeat, Upload, Amount, Complaint, Hostel, BedSpace
+from .models import Department, CustomUser, Exeat, Upload, Amount, Complaint, Hostel, BedSpace, Payment
 from django.contrib.auth import logout,login
 from django.shortcuts import redirect
 from django.core.mail import EmailMessage
@@ -321,11 +321,16 @@ def upload_school_fee_evidence(request):
     if request.user.hostel or request.user.block or request.user.room:
         return redirect('dashboard')
     if request.method == 'POST':
-        image = request.FILES['proof']
-        payment_proof = Upload.objects.create(user=request.user, evidence=image)
-        payment_proof.save()
-
-        return redirect ('hostel_fees')
+        matric_number = request.POST.get('matric_number')
+        
+        # Check if any Payment entry exists with the specified matric number
+        if Payment.objects.filter(matric_number=matric_number).exists():
+            # Payment entry exists for the specified matric number
+            return redirect ('hostel_fees')
+        else:
+            # No payment entry found for the specified matric number
+            messages.error(request, f'No payment found for matric number {matric_number}')
+            return render (request, 'hostel/book_room.html')
     return render (request, 'hostel/book_room.html')
 
 @login_required
@@ -333,7 +338,8 @@ def book_room(request):
     user = request.user
     # if user already have an hostel allocated to them, they should be redirected to home page
     if user.hostel or user.block or user.room:
-        return redirect('home')
+        return redirect('dashboard')
+        message = "You already booked a room"
     print(user.gender)
     if user.gender.pk == 1:
         gender = 'male'
@@ -344,10 +350,10 @@ def book_room(request):
         hostel_name = get_object_or_404(Hostel, name=request.POST.get("hostel-name"))
         bed_space = get_object_or_404(BedSpace, id=request.POST.get("space"))
         if bed_space.bunk.room.block.hostel != hostel_name:
-            messages.info(request, "Invalid details")
+            messages.error(request, "Invalid details")
             return redirect("book_room")
         if bed_space.is_allocated:
-            messages.info(request, "Bed space not available")
+            messages.error(request, "Bed space not available")
             return redirect("book_room")
         bed_space.is_allocated = True
         bed_space.save()

@@ -11,17 +11,20 @@
 </head>
 <body>
   <form method="post" enctype="multipart/form-data" action="{%  url 'payment' %}">
+    {% for message in messages %}
+    <p>{{message.error}}</p>
+    {{endfor}}
     {% csrf_token %}
-    <h1 class="confirm">Pls upload your evidence of payment</h1>
+    <h1 class="confirm">Payment validation</h1>
     <p class="pp">
-      Your evidence of payment is required to proceed to the next step to booking room
+      Your matric number is required to proceed to the next step to booking room
     </p>
 
     <label for="evidence">Upload Payment</label> <br>
-    <input type="file" name="proof" id="evidence" required>
+    <input type="text" name="matric_number" id="evidence" required>
     
     <div class="submit">
-      <button class="btn-evidence">Upload</button>
+      <button class="btn-evidence">Submit</button>
     </div>
   </form>
 </body>

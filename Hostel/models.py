@@ -153,6 +153,7 @@ def exeact_pre_save(sender, instance, **kwargs):
 class Upload(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     evidence = models.ImageField(upload_to = 'evidence-of-payment')
+    created = models.DateTimeField(auto_now_add = True)
     
     def __str__ (self):
         return  f"{self.user} - {self.evidence}"
@@ -164,3 +165,10 @@ class Amount(models.Model):
     
     def __str__(self):
         return self.price
+
+class Payment(models.Model):
+    matric_number = models.CharField(max_length = 15)
+    created = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return self.proof

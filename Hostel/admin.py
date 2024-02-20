@@ -5,7 +5,7 @@ from django.contrib import admin
 
 from django.contrib import admin
 from .models import CustomUser, Level
-from .models import Faculty, Department,Amount, Gender, Hostel, Room, Block, Bunk, BedSpace,Complaint, Exeat, Upload
+from .models import Faculty, Department,Amount, Gender, Hostel, Room, Block, Bunk, BedSpace,Complaint, Exeat, Upload, Payment
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'matric_number',
@@ -42,4 +42,4 @@ admin.site.register(BedSpace)
 admin.site.register(Upload)
 admin.site.register(Amount)
 admin.site.register(Level)
-
+admin.site.register(Payment)
