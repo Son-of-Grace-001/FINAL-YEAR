@@ -52,9 +52,6 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
     
-
-
-
 class Hostel(models.Model):
     GENDER_CHOICES = [
         ('male', 'Male'),
@@ -69,7 +66,7 @@ class Hostel(models.Model):
         return self.name
 
 class Block(models.Model):
-    hostel = models.ForeignKey(Hostel, on_delete=models.CASCADE)
+    hostel = models.ForeignKey(Hostel, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=100)
     # Add any other relevant fields
 
@@ -77,7 +74,7 @@ class Block(models.Model):
         return f"{self.hostel} - {self.name}"
 
 class Room(models.Model):
-    block = models.ForeignKey(Block, on_delete=models.CASCADE)
+    block = models.ForeignKey(Block, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=10, default=1)
     # Add any other relevant fields
 
@@ -85,7 +82,7 @@ class Room(models.Model):
         return f"{self.block} - {self.name}"
 
 class Bunk(models.Model):
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True)
     name = models. CharField(max_length=10)
     # position = models.CharField(max_length=50)  # 'Up' or 'Down'
     # Add any other relevant fields
@@ -94,7 +91,7 @@ class Bunk(models.Model):
         return f"{self.room} - {self.name}"
 
 class BedSpace(models.Model):
-    bunk = models.ForeignKey(Bunk, on_delete=models.CASCADE, default='1')
+    bunk = models.ForeignKey(Bunk, on_delete=models.SET_NULL, null=True, default='1')
     position = models.CharField(max_length=4, choices=[('Up', 'Up'), ('Down', 'Down')])
     is_allocated= models.BooleanField(default=False)
     class Meta:
@@ -116,9 +113,6 @@ class Complaint (models.Model):
     def __str__(self):
         return f"{self.title} - Room {self.room_number} in Block {self.block_number}"
     
-
-
-
 CHOICE_FOR_EXEAT = (
     ("PENDING", 'Exeact request is pending'),
     ("APPROVED", 'Approved by admin'),

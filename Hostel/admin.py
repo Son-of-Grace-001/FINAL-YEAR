@@ -1,9 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
-# admin.py in your app
-
-from django.contrib import admin
 from .models import CustomUser, Level
 from .models import Faculty, Department,Amount, Gender, Hostel, Room, Block, Bunk, BedSpace,Complaint, Exeat, Upload, Payment
 
