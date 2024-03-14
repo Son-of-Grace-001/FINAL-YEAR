@@ -1,4 +1,9 @@
 # views.py
+import json
+import hmac
+import hashlib
+from django.http import HttpResponseBadRequest, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -13,15 +18,12 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, Http404
-import requests
-import os
 import qrcode
 from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 # from utils import send_otp
-from allauth.account.views import LoginView
 from datetime import datetime
 # import pyotp
 
@@ -505,39 +507,48 @@ def hostel_fees(request):
     }
     return render(request, 'hostel/hostel_fees.html', context)
 
-# class CustomLoginView(LoginView):
-#     def form_valid(self, form):
-#         # Call the parent form_valid method
-#         response = super().form_valid(form)
 
-#         # Check if the user is authenticated
-#         if self.request.user.is_authenticated:
-#             # Call the send_otp function
-#             send_otp(self.request)
-#             username = form.cleaned_data['username']
-#             self.request.session['username'] = username
+@csrf_exempt
+def paystack_webhook(request):
+    if request.method == 'POST':
+        # Verify the webhook signature
+        signature = request.headers.get('X-Paystack-Signature')
+        if not signature:
+            return HttpResponseBadRequest('Missing Paystack signature header')
 
+        expected_signature = hmac.new(
+            key=PAYSTACK_WEBHOOK_SECRET.encode('utf-8'),
+            msg=request.body,
+            digestmod=hashlib.sha512
+        ).hexdigest()
 
-# def otp(request):
-#     if request.method == 'POST':
-#         otp = request.POST ['otp']
-#         username = request.session['username']
+        if signature != expected_signature:
+            return HttpResponseBadRequest('Invalid Paystack signature')
 
-#         otp_secret_key = request.session ['otp_secret_key']
-#         otp_valid_until = request.session ['otp_valid_until']
+        # Parse the JSON data from the request body
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return HttpResponseBadRequest('Invalid JSON payload')
 
-#         if otp_secret_key and otp_valid_until is not None:
-#             valid_until = datetime.fromisoformat(otp_valid_until)
+        # Extract relevant data from the webhook notification
+        transaction_id = data.get('data', {}).get('id')
+        amount_paid = data.get('data', {}).get('amount')
+        email = data.get('data', {}).get('customer', {}).get('email')
 
-#             if valid_until > datetime.now():
-#                 totp = pyotp.TOTP(otp_secret_key, interval=300)
-#                 if totp.verify(otp):
-#                     user = get_object_or_404(CustomUser, username=username)
-#                     login(request, user)
+        # Lookup the user based on the email address
+        user = CustomUser.objects.filter(email=email).first()
 
-#                     del request.session['otp_secret_key']
-#                     del request.session['otp_valid_until']
+        if not user:
+            return HttpResponseBadRequest('User not found')
 
-#                     return redirect ('dashboard')
-                
-#     return render(request, 'hostel/otp.html')
+        # Update the user's has_paid_hostel_fee field
+        user.has_paid_hostel_fee = True
+        user.save()
+
+        # Respond with a success message
+        return JsonResponse({'message': 'Webhook processed successfully'}, status=200)
+
+    else:
+        # Respond with an error for unsupported HTTP methods
+        return HttpResponseBadRequest('Unsupported HTTP method')

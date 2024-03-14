@@ -6,7 +6,7 @@ from .models import Faculty, Department,Amount, Gender, Hostel, Room, Block, Bun
 class UserAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'matric_number',
                     'faculty', 'department', 'level', 'gender',
-                    'hostel', 'block', 'room', 'bunk', 'space', 'phone_number')
+                    'hostel', 'block', 'room', 'bunk', 'space', 'phone_number','has_paid_hostel_fee')
     search_fields =  ('matric_number', 'first_name', 'last_name')
     list_per_page = 100
 admin.site.register(CustomUser, UserAdmin)
